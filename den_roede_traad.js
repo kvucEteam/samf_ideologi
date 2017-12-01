@@ -32,7 +32,7 @@ function step_1_template(kpNo, pfNo1, pfNo2) {
 	HTML += 	(jsonData.steps[stepNo-1].hasOwnProperty('explanation'))?'<div id="explanationWrap">'+ explanation(jsonData.steps[stepNo-1].explanation)+'</div>' : '';
 	HTML += '</div>';
 	HTML += '<div id="step_1_template">';	
-	HTML += 	'<div id="cardAndWasteWrap" class="col-xs-12 col-md-4">';
+	HTML += 	'<div id="cardAndWasteWrap" class="col-xs-12 col-md-4">'; 
 	HTML += 		'<div id="cardPile" class="col-xs-6 col-md-12">';
 	HTML += 				'<b>UNDERSPØRGSMÅL</b>';
 	HTML += 			getCardPile(kpNo, pfNo1, pfNo2);
