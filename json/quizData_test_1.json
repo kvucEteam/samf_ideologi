@@ -1,0 +1,65 @@
+{
+	"mainHeader" : "Den røde tråd",
+	"keyProblems": [
+		{ 	"keyProblem" : "Fjendebilleder",
+			"problemformulations" : [
+				{
+					"problemformulation" : "(P0) Hvorfor fremstilles islam som et fjendebillede i Danmark og udgør islam en reel trussel for det danske samfund?", 
+					"subQuestions" : [
+						{"subQuestion" : "(P0) Hvad er fjendebilleder og hvad bruges de til?",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Hvilke årsager kan forklare konflikten mellem muslimer og etniske danskere?",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Er det overhovedet muligt forene islam med den danske kultur?",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Hvad var DDRs forhold til indvandring?",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Hvor mange gange om dagen beder muslimer til Allah?",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				},
+				{
+					"problemformulation" : "(P1) Hvorfor spillede brugen af fjendebilleder en vigtig rolle for både Hitlers og DDR-styrets overtagelse og fastholdelse af magten?", 
+					"subQuestions" : [
+						{"subQuestion" : "(P1) Hvad er fjendebilleder og hvad bruges de til?",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Hvordan blev fjendebilleder anvendt i henholdsvis Hitler-Tyskland og DDR?",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Har fortidens fjendebilleder betydning for Tyskland i dag?",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Er det okay at sammenligne Hitlers jødeforfølgelse med DF’s udlændingepolitik?",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				}
+			]
+		},
+		{ 	"keyProblem" : "Samfundsskabt ulighed",
+			"problemformulations" : [ 
+				{
+					"problemformulation" : "(P0) Hvorvidt er ulighed i det senmoderne Danmark et produkt af markedsmekanismer eller bestemte kulturopfattelser?", 
+					"subQuestions" : [
+						{"subQuestion" : "(P0) Hvad er ulighed og hvordan han den udviklet sig i DK siden 1990?",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Hvordan påvirker sociale og kulturelle baggrunde den sociale mobilitet?",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Bevæger det danske samfund sig i retning af mere eller mindre ulighed?",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Hvad var DDRs forhold til indvandring?",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Hvor mange gange om dagen beder muslimer til Allah?",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				},
+				{
+					"problemformulation" : "(P1) Hvorvidt kan den danske velfærdsmodel overleve i sin nuværende form og med hvilke konsekvenser?", 
+					"subQuestions" : [
+						{"subQuestion" : "(P1) Hvordan har den universelle velfærdsmodel udviklet sig i Danmark siden 1933?",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Hvilket værdigrundlag hviler den universelle model på i Danmark?",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Hvilke fremtidige udfordringer står den universelle model overfor?",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Er det okay at sammenligne Hitlers jødeforfølgelse med DF’s udlændingepolitik?",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				}
+			]
+		}
+	],
+	"steps" : [
+		{
+			"step" : 1,
+			"header" : "Den røde tråd",
+			"instruction" : "Hvor hører underspørgsmålet til? Træk underspørgsmålene hen til den rette problemformulering.",
+			"explanation" : "Formålet med denne øvelse er at træne..."
+		},
+		{
+			"step" : 2,
+			"header" : "Den røde tråd",
+			"instruction" : "Nu skal du trække underspørgsmålene på plads, så de står i den rigtige rækkefølge. Tænk over den røde tråd og den logiske rækkefølge, som undersøgelsen af problemet bedst præsenteres på."
+		}
+	],
+	"generalEndFeedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}

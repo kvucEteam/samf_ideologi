@@ -1,0 +1,94 @@
+{
+	"mainHeader" : "Den røde tråd",
+	"keyProblems": [
+		{ 	"keyProblem" : "nøgleproblem 0",
+			"problemformulations" : [
+				{
+					"problemformulation" : "(P0) Tekst til problemformulering 0.0", 
+					"subQuestions" : [
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 0.0.0",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 0.0.1",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 0.0.2",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 0.0.3",  "correct": true, "order" : 3, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 0.0.0",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 0.0.1",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				},
+				{
+					"problemformulation" : "(P1) Tekst til problemformulering 0.1",  
+					"subQuestions" : [
+						{"subQuestion" : "(P1) Tekst til korrekt underspørgsmål 0.1.0",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Tekst til korrekt underspørgsmål 0.1.1",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Tekst til korrekt underspørgsmål 0.1.2",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 0.1.0",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 0.1.1",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				},
+				{
+					"problemformulation" : "(P2) Tekst til problemformulering 0.2",  
+					"subQuestions" : [
+						{"subQuestion" : "(P2) Tekst til korrekt underspørgsmål 0.2.0",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P2) Tekst til korrekt underspørgsmål 0.2.1",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P2) Tekst til korrekt underspørgsmål 0.2.2",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 0.2.0",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 0.2.1",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				}
+			]
+		},
+		{ 	"keyProblem" : "nøgleproblem 1",
+			"problemformulations" : [
+				{
+					"problemformulation" : "(P0) Tekst til problemformulering 1.0", 
+					"subQuestions" : [
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 1.0.0",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 1.0.1",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 1.0.2",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P0) Tekst til korrekt underspørgsmål 1.0.3",  "correct": true, "order" : 3, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 1.0.0",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 1.0.1",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				},
+				{
+					"problemformulation" : "(P1) Tekst til problemformulering 1.1", 
+					"subQuestions" : [
+						{"subQuestion" : "(P1) Tekst til korrekt underspørgsmål 1.1.0",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Tekst til korrekt underspørgsmål 1.1.1",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P1) Tekst til korrekt underspørgsmål 1.1.2",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 1.1.0",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 1.1.1",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				},
+				{
+					"problemformulation" : "(P2) Tekst til problemformulering 1.2",  
+					"subQuestions" : [
+						{"subQuestion" : "(P2) Tekst til korrekt underspørgsmål 1.2.0",  "correct": true, "order" : 0, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P2) Tekst til korrekt underspørgsmål 1.2.1",  "correct": true, "order" : 1, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(P2) Tekst til korrekt underspørgsmål 1.2.2",  "correct": true, "order" : 2, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 1.2.0",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}},
+						{"subQuestion" : "(B) Tekst til forkert underspørgsmål 1.2.1",  "correct": false, "feedback" : {"posetive" : "Det er rigtigt da...", "negative" : "Det er forkert da..."}}
+					]
+				}
+			]
+		}
+	],
+	"steps" : [
+		{
+			"step" : 1,
+			"header" : "STEP 1 - Den røde tråd",
+			"instruction" : "Hvor hører underspørgsmålet til?",
+			"explanation" : "Formålet med denne øvelse er at træne..."
+		},
+		{
+			"step" : 2,
+			"header" : "STEP 2 - Den røde tråd",
+			"instruction" : "Træk kortene..."
+		},
+		{
+			"step" : 3,
+			"header" : "STEP 3 - Den røde tråd",
+			"instruction" : "Træk kortene..."
+		}
+	],
+	"generalEndFeedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}

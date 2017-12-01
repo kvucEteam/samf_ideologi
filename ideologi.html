@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Genkend en ideologi</title>
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../library/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="ideologi.css" type="text/css" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div id="interface"></div>
+        </div>
+        <script src="../library/vendor_scripts.js"></script>
+        <script src="../library/custom_scripts.js"></script>
+        <script src="ideologi.js"></script>
+        <script type="text/javascript">
+            getAjaxData("GET", "json/ideologi.json", false, "json");
+            // getAjaxData("GET", "json/ideologi_test1.json", false, "json");  
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            one_line_footer();
+        });
+        </script>
+    </body>
+
+</html>
+

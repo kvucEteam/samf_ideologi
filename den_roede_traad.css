@@ -1,0 +1,107 @@
+
+
+
+
+.card{
+	border: 1px solid #999;
+	padding: 20px;
+    width: 80%;
+    min-height: 150px;
+
+    background-color: white;
+    /*border-bottom: 7px solid white;*/
+    border-radius: 6px;
+    /*box-shadow: 1px 1px 1px #bbb;*/
+    cursor: pointer;
+    /*float: left;*/
+    /*height: 60%;*/
+    overflow: auto;
+    padding: 20px;
+    /*position: absolute;*/
+    /*width: 100%;*/
+}
+
+#instructionWrap{
+	padding-left: 0px;
+}
+
+#explanationWrap{
+	padding-left: 0px;
+}
+
+#wasteBin{
+	border: 2px dashed #999;
+	border-radius: 6px;
+}
+
+#cardPile, #wasteBin {
+	height: 250px;
+}
+
+#wasteBin {
+	height: 200px;
+}
+
+.dropZone{
+	border: 2px dashed #999;
+	border-radius: 6px;
+	min-height: 200px;
+	padding-top: 30%;
+}
+.sortableZone{
+	padding:20px;
+}
+
+.sortable_text_container {
+    -moz-user-select: none;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px #ddd;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    overflow: auto;
+    padding: 20px 10% 20px 20px;
+}
+
+.ui-sortable-helper{
+	left: 0px;
+}
+
+.spacer{
+	margin-top: 10px;
+}
+
+.spacerWrap{
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 45%;
+	float: left;
+}
+
+
+
+
+
+.problemFormulationText{
+	margin-bottom: 20px;
+}
+
+.wasteBinHeading{
+	margin-bottom: 10px;
+}
+
+.clone{
+	height: auto;
+	width: auto;
+	opacity: 0.5;
+}
+
+.glyphicons-bin{
+	color: #717272;
+	font-size: 5em;
+	margin-top: 20%;
+	margin-left: 38%;
+	position: relative;
+	z-index: 5;
+}

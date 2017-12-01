@@ -1,0 +1,151 @@
+{
+	"heading": "Genkend en ideologi",
+	"explanation": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, est in feugiat convallis, magna risus sodales neque, sed lobortis sapien justo et erat. ",
+	"instruction": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, est in feugiat convallis, magna risus sodales neque, sed lobortis sapien justo et erat. ",
+	"dropzone": [
+		{
+			"num": 0, "NOTE": " <--------------------------------  Dette er cardPile - den skal være første element!",
+			"attr": {"id": "cardPile", "class": "cardPile"},
+			"heading": "Skal denne have en heading",
+			"defaultText": "Træk kort her til."
+		},
+		{
+			"num": 1,
+			"attr": {"id": "dropzone_1", "class": "dropzone"},
+			"heading": "Socialisme",
+			"defaultText": "Træk et kort her til.",
+			"generalFeedback": {
+				"posetive": "Posetive general feedback 1",
+				"negative": "Negative general feedback 1"
+			}
+		},
+		{
+			"num": 2,
+			"attr": {"id": "dropzone_2", "class": "dropzone"},
+			"heading": "Konservatisme",
+			"defaultText": "Træk et kort her til.",
+			"generalFeedback": {
+				"posetive": "Posetive general feedback 2",
+				"negative": "Negative general feedback 2"
+			}
+		},
+		{
+			"num": 3,
+			"attr": {"id": "dropzone_3", "class": "dropzone"},
+			"heading": "Liberalisme",
+			"defaultText": "Træk et kort her til.",
+			"generalFeedback": {
+				"posetive": "Posetive general feedback 3",
+				"negative": "Negative general feedback 3"
+			}
+		}
+	],
+	"category": [
+		{
+			"num": 0,
+			"heading": "Category heading 1",
+			"question": [
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Lib). Frie mennesker er forskellige, og det har værdi i sig selv at få lov til at gribe chancen, kæmpe for sin succes og dermed sætte sit eget individuelle præg på sin tilværelse."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Lib). Du er først og fremmest dig selv og skal måles på din indsats, dine evner og personlighed."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Lib). Frem for stræben efter materiel lighed kan vi alle høste fordel af vækst, velstand og fremgang i Danmark."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Kon). Vi er imod, at man kan deponere sit sociale ansvar gennem en skattebillet. For hvis det offentlige overtager for meget af det ansvar, der egentlig er vores eget, mister vi fornemmelsen for ansvar og den nærhed, der ligger i at hjælpe hinanden i familien, blandt venner eller i lokalsamfundet."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Kon). Vi mener, at et samfund skal måles på, hvordan det behandler de svageste. Derfor arbejder vi for et næstekærligt samfund, hvor reelt udsatte borgere får målrettet hjælp til deres problemer."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Kon). Vi ønsker et samfund, hvor borgerne er trygge både i og uden for deres hjem, og hvor hensynet til offeret altid vejer tungere end hensynet til forbryderen. Vi har længe arbejdet og arbejder fortsat for, at strafniveauet for vold, pædofili, voldtægt og andre personfarlige forbrydelser skærpes."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Soc). Uligheden vokser, og miljøet ødelægges, både globalt og lokalt. Der skyldes, at vores samfund i dag er indrettet og styret efter, hvordan der skabes mest mulig profit."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Soc). Det er jagten på profit til de få, der kendetegner det kapitalistiske samfund, vi lever i."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "(Soc). Menneskelivet kan være godt. Det oplever de fleste af os med større eller mindre mellemrum. Især trives vi i hverdagens fællesskaber med familie, kolleger og venner. Vi bliver klogere, gladere og bedre af at være sammen med andre på arbejdspladsen, i skolen og i fritiden."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				}
+			]
+		}
+	]
+}
