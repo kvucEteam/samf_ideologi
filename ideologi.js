@@ -699,9 +699,9 @@ $(document).ready(function() {
 
 			var dropZoneArr = [];
 			for (var n in jsonData.dropzone) {
-				if () {
-				dropZoneArr.push(jsonData.dropzone[n].attr.id);
-			}
+				if (parseInt(n)!=0) {
+					dropZoneArr.push(jsonData.dropzone[n].attr.id);
+				}
 			}
 			console.log('card - REVERT - dropZoneArr: ' + dropZoneArr);
 
