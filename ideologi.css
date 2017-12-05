@@ -44,6 +44,7 @@
 	height: 250px;
 
 	position: relative;
+	top: 21%;
 	/*display: inline-block;*/
 	/*width: 44%;*/
 	/*padding-top: 30%;*/
@@ -75,8 +76,8 @@
 	margin-left: 2%; 
 	border: 2px dashed #999;
 	border-radius: 6px;
-	/*min-height: 200px;*/
-	padding-top: 44%;   /* <------ Set dropzone height */
+	min-height: 200px;
+	padding-top: 53%;   /* <------ Set dropzone height */
 	/*text-align: center;*/
 	/*margin: 10px;*/
 }
@@ -124,11 +125,17 @@
 }
 
 
+/*.centerText, .centerBtn {*/
 .centerText {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.centerBtn {
+	display: none;
+	margin-left: 2%;
 }
 
 
@@ -140,10 +147,10 @@
 	margin-bottom: 10px;
 }
 
-.clone{
-	height: auto;
+.Clone{
+	height: 100%;
 	width: auto;
-	opacity: 0.5;
+	/*opacity: 0.5;*/
 	overflow: hidden;
 }
 
@@ -162,4 +169,28 @@
 
 .dropzoneRow {
 	display: flex;
+}
+
+.answer {
+	font-style: italic;
+}
+
+#microhint_target {
+	 width: 80%;
+	position: relative;
+	top: 80%;
+	/*border: 1px solid red;*/
+}
+
+
+#hiddenContent {
+	display: none;
+}
+
+.boldText {
+	font-weight: 700;
+}
+
+#UserMsgBox p {
+	margin-bottom: 10px;
 }

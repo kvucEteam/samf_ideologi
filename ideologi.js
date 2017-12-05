@@ -1,352 +1,15 @@
 
-
-/*
-
-
-function setEqualProblemFormulationTextHeight(){
-	var maxHeight = 0;
-	$('.problemFormulationText' ).each(function( index, element ) {
-		var height = $(element).height();
-		if (maxHeight < height) maxHeight = height;
-	});
-	$('.problemFormulationText' ).each(function( index, element ) {
-		$(element).height(maxHeight);
-	});
-}
-
-
-function lableDraggabels(){
-	for (var n in jsonData.keyProblems) {
-		for (var m in jsonData.keyProblems[n].problemformulations) {
-			for (var t in jsonData.keyProblems[n].problemformulations[m].subQuestions) {
-				jsonData.keyProblems[n].problemformulations[m].dropClassContainer = 'problem_'+m;
-				if (jsonData.keyProblems[n].problemformulations[m].subQuestions[t].correct) {
-					jsonData.keyProblems[n].problemformulations[m].subQuestions[t].dropClass = 'problem_'+m;
-				} else {
-					jsonData.keyProblems[n].problemformulations[m].subQuestions[t].dropClass = 'wasteBin';
-				}
-			}
-		}
-	}
-	console.log('lableDraggabels - jsonData: ' + JSON.stringify(jsonData));
-}
-
-
-function ShuffelArray(ItemArray){
-    var NumOfItems = ItemArray.length;
-    var NewArray = ItemArray.slice();  // Copy the array...
-    var Item2; var TempItem1; var TempItem2;
-    for (var Item1 = 0; Item1 < NumOfItems; Item1++) {
-        Item2 = Math.floor( Math.random() * NumOfItems);
-        TempItem1 = NewArray[Item1];
-        TempItem2 = NewArray[Item2];
-        NewArray[Item2] = TempItem1;
-        NewArray[Item1] = TempItem2;
-    }
-    return NewArray;
-}
-
-
-
-function getCardPile(kpNo, pfNo1, pfNo2){
-	var JD = jsonData.keyProblems[kpNo];
-	var subQuestions = JD.problemformulations[pfNo1].subQuestions.concat(JD.problemformulations[pfNo2].subQuestions);
-
-	console.log('subQuestions 1: ' + JSON.stringify(subQuestions, null, 4));
-	// console.log('subQuestions 1: ' + JSON.stringify(subQuestions));
-
-	subQuestions = ShuffelArray(subQuestions);  // This randomizes the subQuestions
-
-	// console.log('subQuestions 2: ' + JSON.stringify(subQuestions, null, 4));
-	// console.log('subQuestions 2: ' + JSON.stringify(subQuestions));
-
-	var HTML = '';
-	for (var n in subQuestions) {
-		HTML += '<div id="card_'+((subQuestions[n].hasOwnProperty('order'))?subQuestions[n].order:'')+'" class="card '+subQuestions[n].dropClass+'">'+subQuestions[n].subQuestion+'</div>';
-		// if (n == 3) break;
-	}
-	return HTML;
-}
-
-
-function organizeCardPile(parentContainer, hideAboveNo, marginTop) {  // <------- "marginTop" is currently not in use....
-	var margin = 30;
-	console.log('organizeCardPile - parentContainer: ' + parentContainer);
-	$( parentContainer+" .card" ).each(function( index, element ) {
-		margin -= (index <= hideAboveNo)? 5 : 0;
-		index += (parentContainer.indexOf('cardPile') !== -1)? $( parentContainer+" .card" ).length : 0 ;  // This makes sure that the z-index of the #cardPile is alway higher than th dropzones.
-		
-		// $(element).css({"position": "absolute", "top": String(margin)+'px', "left": String(margin)+'px', "z-index": index, "margin-top": marginTop+'%'});
-		var pcOffset = $(parentContainer).offset();
-		var pcPosition = $(parentContainer).position();
-		console.log('organizeCardPile - pcOffset: ' + JSON.stringify(pcOffset));
-		console.log('organizeCardPile - pcPosition: ' + JSON.stringify(pcPosition));
-		$(element).css({"position": "absolute", "top": String(margin+pcPosition.top)+'px', "left": String(margin+10)+'px', "z-index": index, "margin-top": marginTop+'%'});
-		
-	}); 
-}
-
-// IMPORTANT: Class "draggable" (and NOT clases: "ui-draggable", "ui-draggable-handle" and "ui-draggable-dragging") makes all the problems of cloning from ouside and into a droppable.
-function SimpleClone(TargetSelector) {
-    var Clone = $(TargetSelector).clone().removeClass("draggable").css({
-        'position': 'absolute',
-        'top': 'auto',
-        'left': 'auto',
-        'height': 'auto', // <---- NEW
-        'width': '80%'    // <---- NEW
-    }); // This is necessary for cloning inside the droppable to work properly!!!
-    // Clone = Clone.removeAttr("id").removeClass("ui-draggable ui-draggable-handle ui-draggable-dragging"); // This just cleans the attributes so the DOM-element looks nicer.
-    Clone = Clone.removeClass("ui-draggable ui-draggable-handle ui-draggable-dragging"); // This just cleans the attributes so the DOM-element looks nicer.
-    // Clone = Clone.addClass("Clone");
-    return Clone;
-}
-
-
-function makeSortable(targetContainer) {
-	// Sort function are placed here due to readiness issues of the DOM:
-	$( targetContainer ).sortable({
-		axis: 'y',
-		sortAnimateDuration: 500,
-	    sortAnimate: true,
-	    distance: 25,
-	    containment: ".problem",
-	    update: function(event, ui) {
-	    	console.log('makeSortable - UPDATE');
-	    	// updateSortableOrderArray(2);
-	    },
-	    start: function(event, ui) {
-	    	console.log('makeSortable - START');
-	        console.log('makeSortable - ui.item.index: ' + ui.item.index());
-	        ui.item.css({'left':'35px'});  // IMPORTANT HACK: Without this hack the sortable_text_containers will move to the left by 35 px when sorting starts.
-	    },
-	    stop: function(event, ui) {
-	        console.log('makeSortable - STOP');
-	    }
-	});
-}
-
-
-$( document ).on('click', ".checkAns_step2", function(event){
-
-	var allCorrect = true;
-	$('.sortableZone' ).each(function( index1, element1 ) {
-		var height = 0; var pt = 0; var pb = 0;
-		$('.sortable_text_container', element1 ).each(function( index2, element2 ) {
-			console.log('checkAns_step2 - each - sortableZone: '+ index1 +', sortable_text_container: ' + index2 + ' - id: ' + $(element2).prop('id'));
-			var cardId = parseInt($(element2).prop('id').replace('card_',''));
-			if (cardId != index2) {
-				allCorrect = false;
-			};
-		});
-	});
-
-	var HTML = '';
-	if (allCorrect){
-
-		$('#cardAndWasteWrap').html('<b>DU ER FÆRDIG MED ØVELSEN</b><p>'+jsonData.generalEndFeedback+'</p><span id="tryAgain" class="btn btn-lg btn-primary"> PRØV IGEN? </span>');
-
-		HTML += '<h3>Underspørgsmålene står<span class="label label-success">I RIGTIG RÆKKEFØLGE</span> </h3>';
-		HTML += '<p>Du har set den røde tråd i problemformuleringens underspørgsmål og er nu færdig med øvelsen.</p>';
-	} else {
-		HTML += '<h3>Underspørgsmålene står<span class="label label-danger">IKKE I RIGTIG RÆKKEFØLGE</span> </h3>';
-		HTML += '<p>Prøv igen. Læs teksterne og tænk over den røde tråd - både hvad angår taksonomi og den logiske rækkefølge, som du vil undersøge problemet i.</p>';
-	}
-	UserMsgBox("body", HTML);
-});
-
-
-$( document ).on('click', "#tryAgain", function(event){
-	window.location.reload();
-});
-
-
-
-function returnUrlPerameters(){
-	window.UlrVarObj = {}; 
-    var UrlVarStr = window.location.search.substring(1);
-    console.log("returnUrlPerameters - UrlVarStr: " + UrlVarStr);
-    var UrlVarPairArray = decodeURIComponent(UrlVarStr).split("&");  // decodeURIComponent handles %26" for the char "&" AND "%3D" for the char "=".
-    console.log("returnUrlPerameters - UrlVarPairArray: " + UrlVarPairArray);
-    for (var i in UrlVarPairArray){
-        var UrlVarSubPairArray = UrlVarPairArray[i].split("=");  // & = %3D
-        if (UrlVarSubPairArray.length == 2){
-            UlrVarObj[UrlVarSubPairArray[0]] = UrlVarSubPairArray[1];
-        }
-    }
-    console.log("returnUrlPerameters - UlrVarObj: " + JSON.stringify( UlrVarObj ));
-    return UlrVarObj;
-}
-
-function getUrlSpecifiedQuiz(){
-	var urlObjKeyLength = Object.keys(UlrVarObj).length;
-	console.log("getUrlSpecifiedQuiz - urlObjKeyLength: " + urlObjKeyLength);
-	if (urlObjKeyLength > 0){
-		console.log("getUrlSpecifiedQuiz - USER SPECIFIED QUIZ: TRUE");
-		var uo = UlrVarObj;
-		if ((uo.hasOwnProperty('n')) && (uo.hasOwnProperty('p0')) && (uo.hasOwnProperty('p1'))){ // IMPORTANT p0 < P1 = 0 < 1, OTHERWISE IT WILL NOT WORK!
-			console.log("getUrlSpecifiedQuiz - n: " + uo.n + ', p0: '+ uo.p0 +', p1: '+ uo.p1);
-			if (uo.p1 < uo.p0){
-				var Tp1 = uo.p1;
-				uo.p1 = uo.p0;
-				uo.p0 = Tp1;
-			}
-			
-			step_1_template(uo.n, uo.p0, uo.p1);
-		}
-		if ((uo.hasOwnProperty('n')) && (urlObjKeyLength == 1)){
-			console.log("getUrlSpecifiedQuiz - n: " + uo.n);
-
-			var JD = jsonData.keyProblems[uo.n];
-			JD.problemformulations = ShuffelArray(JD.problemformulations);  // This shuffels the problemformulations randomly...
-			console.log('getUrlSpecifiedQuiz - JD.problemformulations: ' + JSON.stringify(JD.problemformulations, null, 4));
-
-			step_1_template(uo.n, 0, 1); // "p0 = 0" AND "p1 = 1" will be two random problemformulations because of the ShuffelArray above...
-		}
-		if ((uo.hasOwnProperty('q')) && (uo.q == 'random') && (urlObjKeyLength == 1)){
-			console.log("getUrlSpecifiedQuiz - q: " + uo.q);
-
-			var JKlength = jsonData.keyProblems.length-1;
-			console.log('getUrlSpecifiedQuiz - JKlength: ' + JKlength);
-
-			var JKindex = returnRandArray(0, JKlength)[0];
-			console.log('getUrlSpecifiedQuiz - JKindex: ' + JKindex);
-
-			var JD = jsonData.keyProblems[JKindex];
-			JD.problemformulations = ShuffelArray(JD.problemformulations);  // This shuffels the problemformulations randomly...
-			console.log('getUrlSpecifiedQuiz - JD.problemformulations: ' + JSON.stringify(JD.problemformulations, null, 4));
-
-			step_1_template(JKindex, 0, 1); // "p0 = 0" AND "p1 = 1" will be two random problemformulations because of the ShuffelArray above...
-		}
-	} else {
-		console.log("getUrlSpecifiedQuiz - USER SPECIFIED QUIZ: FALSE");
-	}
-}
-
-
-function returnRandArray(min, max){
-	var arr = [];
-	for (var i = min; i <= max; i++) {
-		arr.push(i);
-	};
-	arr = ShuffelArray(arr);
-	return arr;
-}
-console.log('returnRandArray(0,8): ' + JSON.stringify(returnRandArray(0, 8)));
-console.log('returnRandArray(10,20): ' + JSON.stringify(returnRandArray(10, 20)));
-
-
-// $(window).on('resize', function() {
-// 	setEqualProblemFormulationTextHeight();
-
-// 	rotateCheck();
-// });
-
-
-// $(document).ready(function() {
-// 	// rotateCheck();
-// 	// returnUrlPerameters();
-// 	// getUrlSpecifiedQuiz();
-// 	// $('#DataInput').show(); // The hide / show scheme of #DataInput removes the "visual loading" of the first call to step_1_template() in the HTML-file. 
-// 	// // IMPORTANT NOTES:
-// 	// // ================
-// 	// // lableDraggabels();			// Label all the draggables... This has been moved inside step_1_template(), so that step_1_template() can be called from the HTML-file.
-// 	// // step_1_template(0, 0, 1);	// KEYPROBLEM: "Fjendebilleder" This has been moved to the HTML file, so that each exercies has its own HTML file
-// 	// // step_1_template(1, 0, 1);	// KEYPROBLEM: "Samfundsskabt ulighed" This has been moved to the HTML file, so that each exercies has its own HTML file
-// 	// console.log('READY - jsonData: ' + JSON.stringify(jsonData, null, 4));
-// 	// setEqualProblemFormulationTextHeight();
-// 	// organizeCardPile('#cardPile',5, 10);
-// 	// enable_audio();
-// 	// window.dropZoneObj = null;
-
-
-// 	$( ".card" ).draggable({
-// 		revert: function(valid) {
-// 		// ATO found the following if-else construct, that solves the error-sound issue. It is a good (but undocumented) way of triggering "events" on drop / not-drop.
-// 		// SEE:   http://jamesallardice.com/run-a-callback-function-when-a-jquery-ui-draggable-widget-reverts/
-//         if(valid) {
-//             console.log("Dropped in a valid location");
-//             correct_sound();
-//         }
-//         else {
-//          console.log("Dropped in a invalid location");
-//          	error_sound();
-//         }
-//         return !valid;
-//     },
-// 		start: function(event, ui) {
-// 			console.log('card - START');
-// 			window.topPos = $(this).css('top');
-// 		},
-// 		stop: function(event, ui) {
-// 			console.log('card - STOP');
-
-// 			if (dropZoneObj !== null){ // If student answer is correct...
-// 				var dropId = $(dropZoneObj).prop('id');
-// 				console.log('card - dropId: ' + dropId);
-
-// 				$(dropZoneObj).append(SimpleClone($(this)).addClass("Clone"));  // Append the cloned card to dropzone
-// 				$(this).remove();												// Remove the original card
-// 				organizeCardPile('#'+dropId, 5, 0);
-				
-// 				// if (dropId == 'wasteBin') {
-// 				// 	$('.glyphicons-bin').css({'opacity':'0'});
-// 				// 	$( '.glyphicons-bin' ).animate({ opacity: 1}, 1000);
-// 				// 	$( '#'+dropId+' .card' ).last().animate({ opacity: 0.40}, 1000);
-// 				// } 
-
-// 				dropZoneObj = null;  // Reset dropZoneObj...
-
-// 				// console.log('card - CORRECT ');
-// 				// correct_sound();                        
-// 			} 
-// 			else {  // If student answer is wrong...
-
-// 				console.log('card - ERROR ');
-// 				// error_sound();				// <------ Does not work on mobile devices - see the solution ATO found above. 
-// 				$(this).css({'top': topPos});   // This is done to make Internet Explore 11 understand that it needs på place the card back to its original position.
-// 			}
-
-// 			if ($('#cardPile .card').length == 0) {
-// 				console.log('step_2_template - INIT');
-// 				step_2_template();
-// 			}
-
-// 		},
-// 		drag: function(event, ui) {
-// 			console.log('card - DRAG');
-// 		}
-// 	});
-// 	$( "#dropZone_0" ).droppable({
-// 		accept: ".problem_0",
-
-// 		drop: function(event, ui) {
-// 			console.log('card - DROP - problem_0');
-// 			window.dropZoneObj = $(this);
-// 		} 
-// 	});
-// 	$( "#dropZone_1" ).droppable({
-// 		accept: ".problem_1",
-// 		drop: function(event, ui) {
-// 			console.log('card - DROP - problem_1');
-// 			window.dropZoneObj = $(this);
-// 		}  
-// 	});
-// 	$( "#wasteBin" ).droppable({
-// 		accept: ".wasteBin",
-// 		drop: function(event, ui) {
-// 			console.log('card - DROP - wasteBin');
-// 			window.dropZoneObj = $(this);
-// 		}  
-// 	});
-// });
-
-
-*/
-
-
 //#########################################################################################################################
 // 										NY KODE TIL SAMFUNDSFAG
 //#########################################################################################################################
+
+// MANGLER:
+// 	- counter
+// 	- visning af tekst
+//  - Check kategorierne på cards at de er de rigtige!
+
+// Tæller. Der skaber et reflektionspres? (3/30 spørgsmål) Tælle "fejl"? Første gang rigtigt? Graduerede point. Forsøg: 30 rigtige på 30 forsøg. 30 rigtige på 50 forsøg. 
+
 
 
 function organizeCardPile(parentContainer, hideAboveNo, marginTop) {  // <------- "marginTop" is currently not in use....
@@ -362,7 +25,9 @@ function organizeCardPile(parentContainer, hideAboveNo, marginTop) {  // <------
 		console.log('organizeCardPile - pcOffset: ' + JSON.stringify(pcOffset));
 		console.log('organizeCardPile - pcPosition: ' + JSON.stringify(pcPosition));
 		// $(element).css({"position": "absolute", "top": String(margin+pcPosition.top)+'px', "left": String(margin+10)+'px', "z-index": index, "margin-top": marginTop+'%'});
-		$(element).css({"position": "absolute", "top": String(margin+0)+'px', "left": String(margin+10)+'px', "z-index": index});
+		
+		// $(element).css({"position": "absolute", "top": String(margin+0)+'px', "left": String(margin+10)+'px', "z-index": index});  	// COMMENTED OUT 04-12-2017
+		$(element).css({"position": "absolute", "top": String(margin+5)+'px', "left": String(margin+25)+'px', "z-index": index});		// ADDED 04-12-2017
 		
 	}); 
 }
@@ -382,24 +47,64 @@ function setCardId() {
 }
 
 
-function makeCardPile(categoryNum, randomize){
+// function makeCardPile(categoryNum, randomize){   // COMMENTED OUT d. 04-12-2017
+function makeCardPile(){  							// ADDED d. 04-12-2017
 
-	var JD = jsonData.category[categoryNum];
-	var questionObj = JD.question;
 
-	console.log('questionObj 1: ' + JSON.stringify(questionObj, null, 4));
+	// var JD = jsonData.category[categoryNum];		// COMMENTED OUT d. 04-12-2017
+	// var questionObj = JD.question;		 		// COMMENTED OUT d. 04-12-2017
 
-	questionObj = (randomize)? ShuffelArray(questionObj) : questionObj;  // This randomizes the questionObj array
+	console.log('makeCardPile - jsonData.useQuestionsFromCategory: ' + jsonData.useQuestionsFromCategory);		// ADDED d. 04-12-2017
+	var questionArr = [];   																					// ADDED d. 04-12-2017
+	for (var n in jsonData.useQuestionsFromCategory) {
+		questionArr = questionArr.concat(jsonData.category[jsonData.useQuestionsFromCategory[n]].question);
+	}
+	console.log('makeCardPile - questionArr: ' + JSON.stringify(questionArr, null, 4));							// ADDED d. 04-12-2017
 
-	console.log('questionObj 2: ' + JSON.stringify(questionObj, null, 4));
+	var questionObj = questionArr;																				// ADDED d. 04-12-2017
+
+
+	console.log('makeCardPile - questionObj 1: ' + JSON.stringify(questionObj, null, 4));
+
+	// questionObj = (randomize)? ShuffelArray(questionObj) : questionObj;  // This randomizes the questionObj array 				// COMMENTED OUT d. 04-12-2017
+	questionObj = (jsonData.randomizeCards)? ShuffelArray(questionObj) : questionObj;  // This randomizes the questionObj array 	// ADDED d. 04-12-2017
+
+	console.log('makeCardPile - questionObj 2: ' + JSON.stringify(questionObj, null, 4));
 	// console.log('questionObj 2: ' + JSON.stringify(subQuestions));
 
 	var HTML = '';
 	for (var n in questionObj) {
 		// HTML += '<div id="card_'+n+'" class="card">'+draggableCardTypes(questionObj[n])+'</div>';
 		// HTML += '<div id="card_'+n+'" class="card '+dropzoneAcceptance(questionObj[n])+'">'+draggableCardTypes(questionObj[n])+'</div>'; // COMMENTED OUT 30/11-2017
-		HTML += '<div id="card_'+questionObj[n].cardId+'" class="card '+dropzoneAcceptance(questionObj[n])+'">'+draggableCardTypes(questionObj[n])+'</div>';    // ADDED 30/11-2017
+		HTML += '<div id="card_'+questionObj[n].cardId+'" class="card '+dropzoneAcceptance(questionObj[n])+'">'+showAnswer(questionObj[n])+draggableCardTypes(questionObj[n])+'</div>';    // ADDED 30/11-2017
 		// if (n == 3) break;
+	}
+	return HTML;
+}
+
+function ShuffelArray(ItemArray){
+    var NumOfItems = ItemArray.length;
+    var NewArray = ItemArray.slice();  // Copy the array...
+    var Item2; var TempItem1; var TempItem2;
+    for (var Item1 = 0; Item1 < NumOfItems; Item1++) {
+        Item2 = Math.floor( Math.random() * NumOfItems);
+        TempItem1 = NewArray[Item1];
+        TempItem2 = NewArray[Item2];
+        NewArray[Item2] = TempItem1;
+        NewArray[Item1] = TempItem2;
+    }
+    return NewArray;
+}
+
+// ((showAnswer_bool)? '<span class="answer">'++'</span>' : '')
+function showAnswer(qObj) {
+	var HTML = '';
+	if (showAnswer_bool) {
+		HTML += '<span class="answer"> ('; 
+			for (var n in qObj.correctDropzoneNum) {
+				HTML += jsonData.dropzone[qObj.correctDropzoneNum[n]].heading + ((parseInt(n)+1 < qObj.correctDropzoneNum.length)? ', ' : ')');
+			}
+		HTML += '</span>';
 	}
 	return HTML;
 }
@@ -540,7 +245,7 @@ function SimpleClone(TargetSelector) {
         'position': 'absolute',
         'top': 'auto',
         'left': 'auto',
-        'height': 'auto', // <---- NEW
+        'height': '83%', // <---- NEW
         'width': '80%'    // <---- NEW
     }); // This is necessary for cloning inside the droppable to work properly!!!
     // Clone = Clone.removeAttr("id").removeClass("ui-draggable ui-draggable-handle ui-draggable-dragging"); // This just cleans the attributes so the DOM-element looks nicer.
@@ -587,11 +292,11 @@ function template() {
 		for (var k = n*numOfEnlementsInRow; k < n*numOfEnlementsInRow + ((n+1 < numOfRows)? numOfEnlementsInRow : ((modulus == 0)? numOfEnlementsInRow : modulus)); k++) {
 			console.log("template - k : "+k);
 			if (k == 0) {
-				// HTML += '<div id="cardPileWrap"><div '+generateAttrStr(jsonData.dropzone[k].attr)+'>'+makeCardPile(0, false)+' &nbsp; </div></div>';
-				HTML += '<div id="cardPileWrap"><div '+generateAttrStr(jsonData.dropzone[k].attr)+'>'+makeCardPile(0, false)+' &nbsp; </div></div>';
+				// HTML += '<div id="cardPileWrap"><div '+generateAttrStr(jsonData.dropzone[k].attr)+'>'+makeCardPile(0, false)+' &nbsp; </div></div>';  // COMMENTED OUT d. 04-12-2017
+				HTML += '<div id="cardPileWrap"><div '+generateAttrStr(jsonData.dropzone[k].attr)+'>'+makeCardPile()+' &nbsp; </div></div>'; 	 // ADDED d. 04-12-2017
 			} else {
 				HTML += '<div class="dropzoneWrap">';
-				HTML += 	'<h4 class="dropzoneHeading">'+jsonData.dropzone[k].heading+'</h4>';
+				HTML += 	'<h3 class="dropzoneHeading">'+jsonData.dropzone[k].heading+'</h3>';
 				// HTML += 	'<div '+generateAttrStr(jsonData.dropzone[k].attr)+'>&nbsp;</div>';
 				HTML += 	'<div '+generateAttrStr(jsonData.dropzone[k].attr)+'> <span class="centerText">'+((jsonData.dropzone[k].hasOwnProperty('defaultText') && jsonData.dropzone[k].defaultText!='')? jsonData.dropzone[k].defaultText : '')+'</span></div>';
 				HTML += '</div>';
@@ -604,6 +309,53 @@ function template() {
 
 	console.log('template - HTML: ' + HTML);
 	return HTML;
+}
+
+function template2() {
+
+	var windowHeight = $(window).height();				
+	var dropzoneWrapHeight = $('.dropzoneWrap').height();	
+	var dropzonePercentHeight = (dropzoneWrapHeight/windowHeight)*100;
+	console.log('template2 - windowHeight: ' + windowHeight + ', dropzoneWrapHeight: ' + dropzoneWrapHeight + ', dropzonePercentHeight: ' + dropzonePercentHeight);
+
+	$('#cardPile').append('<div id="microhint_target"> &nbsp; </div>');
+	microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng.', false, '#000');   //   "Flot" "Du kan nu læse sætningerne i deres oprindelige sammenhæng."
+	$('.microhint').hide().fadeIn(600);
+
+	$(".dropzone" ).each(function( index, element ) { 
+	    $(element).fadeOut(600, function(){
+
+	    	var btnText = jsonData.dropzone[index+1].view2_btnText;
+	    	var btnRef = jsonData.dropzone[index+1].view2_btnRef;
+	    	console.log('template2 - index: ' + index + ', btnText: ' + btnText);
+	    	$(element).after('<span class="centerBtn btn btn-info" data-btnRef="'+btnRef+'">'+btnText+'</span>');
+	    	$('.centerBtn').fadeIn(600);
+	    	$(this).remove();
+
+	    	// $('.dropzoneWrap').css({'height': dropzonePercentHeight+'%'});  // Procent virker ikke
+	    	$('.dropzoneWrap').height(dropzoneWrapHeight);  // 
+	    });
+	});
+
+	window.ajustDropzoneHeight = true;;
+}
+
+// The content of this function is only active when the function "template2()""
+function ajustDropzoneHeight_template2() {
+	console.log('ajustDropzoneHeight_template2 - CALLED');
+
+	if ((typeof(ajustDropzoneHeight)!=='undefined') && (typeof(runOnce)==='undefined')) {
+		window.runOnce = true;
+		window.dropzoneWrapHeight = $('.dropzoneWrap').height();
+		window.dropzoneWrapWidth = $('.dropzoneWrap').width();
+		window.dropzoneWrapRatio = dropzoneWrapHeight/dropzoneWrapWidth;
+	}
+
+	if (typeof(dropzoneWrapHeight)!=='undefined') {
+		var TdropzoneWrapHeight = dropzoneWrapRatio*$('.dropzoneWrap').width();
+		console.log('ajustDropzoneHeight_template2 - TdropzoneWrapHeight: ' + TdropzoneWrapHeight);
+		$('.dropzoneWrap').height(TdropzoneWrapHeight);
+	}
 }
 
 
@@ -658,8 +410,10 @@ function isDropZoneUnderDraggable(dropZoneArr, draggableId){
 	for (var n in dropZoneArr){
 		var dropzone_pos = $(dropZoneArr[n]).offset();
 		var dropzone_width = $(dropZoneArr[n]).width();
-		var dropzone_height = $(dropZoneArr[n]).height();
-		
+		// var dropzone_height = $(dropZoneArr[n]).height();     // COMMENTED OUT 04-12-2017 - For some strange reason, this does not work ...?
+		var dropzone_height = parseInt($(dropZoneArr[n]).css( "height" ).replace('px', '')); // ADDED 04-12-2017 - This works...
+
+		console.log('isDropZoneUnderDraggable - '+dropZoneArr[n]+' - dropzone_width: ' + dropzone_width + ', dropzone_height: ' + dropzone_height );
 		console.log('isDropZoneUnderDraggable - '+dropZoneArr[n]+' - upperLeftCorner - left: ' + dropzone_pos.left + ', top: ' + dropzone_pos.top );
 		console.log('isDropZoneUnderDraggable - '+dropZoneArr[n]+' - lowerRightCorner - left: ' + String(dropzone_pos.left + dropzone_width) + ', top: ' +String(dropzone_pos.top + dropzone_height) );
 
@@ -674,7 +428,217 @@ function isDropZoneUnderDraggable(dropZoneArr, draggableId){
 }
 
 
+// // =====================================================================================================
+// // 		This function is a copy of the "html" method from writeProcessClass.js in danA_skriveproces
+// // =====================================================================================================
+// // This method fetches markup (BUT INTENDED FOR TEXT PRIMERALY) from the DOM by use of a source-selector, and inserts it into the target fields by use of a target-selector.
+// //
+// // ARGUMENTS:
+// // ==========
+// // 		"html(sourceSelector, targetSelector)" or "html('sourceSelector', 'targetSelector')"
+// //
+// // EXAMPLE OF USE: 
+// // ===============
+// // 		To use this method, one writes e.g. "html(#step3_instruction, .instruction)" in the JSON-file
+// function html(json) {
+//     console.log('\nhtml - CALLED');
+//     // var stepObj = jsonData.step[this.api.currentStepNo];
+
+//     var stepObjStr = JSON.stringify(json);
+//     console.log('html - stepObjStr: ' + stepObjStr);
+
+//     var pos_start = stepObjStr.indexOf('html(');
+
+//     var count = 0;
+
+//     while ((pos_start !== -1) && (count < 25)) {
+//         console.log('html - A0');
+
+//         console.log('html - count: ' + count);
+
+//         var pos_end = stepObjStr.indexOf(')"', pos_start);
+
+//         if (pos_end !== -1) {
+//             console.log('html - A1');
+
+//             var argArr = stepObjStr.substring(pos_start + 6, pos_end).replace(/\'/g, '').split(',');
+//             console.log('html - argArr: ' + JSON.stringify(argArr));
+
+//             if (argArr.length == 2) {
+//                 console.log('html - A2');
+
+//                 var source = argArr[0].trim();
+//                 var target = argArr[1].trim();
+//                 console.log('html - source: "' + source + '", target: "' + target + '"');
+
+//                 $(target).html($(source).html());
+//                 // $(source).before('<h4 class="step_clipborad_header">'+source+'</h4>');
+
+//             } else {
+//                 console.log('html - A3');
+
+//                 alert('FEJL FRA: "html(' + stepObjStr.substring(pos_start + 6, pos_end) + ')", som ikke rummer det rigtige antal selectors, som skal være 2.');
+//             }
+//         }
+
+//         pos_start = stepObjStr.indexOf('html(', pos_end);
+//         console.log('html - pos_start: ' + pos_start);
+
+//         ++count;
+//     }
+// }
+
+
+
+// Til bugtest af isDropZoneUnderDraggable():
+// $( document ).on( "mousemove", function( event ) {
+//   $( "#log" ).text( "pageX: " + event.pageX + ", pageY: " + event.pageY );
+// });
+
+
+/*
+// ##################################################################################################################################################################################################################
+
+
+// How to use this function:
+// =========================
+// Call the function from your html-file with the following parameters:
+//
+//      getAjaxData("GET", "path_to_my_json_file", false, "json");
+//
+// - where "path_to_my_json_file" is the path to the JSON-file that needs to be loaded, eg. "json/myJsonFile.json".
+// Just leave the call to the other perameters of the function ("Type", "Async", "DataType") as they are in the above
+// example.
+// 
+// IMPORTANT: 
+// ==========
+// The function call declares the global variable "jsonData" which will contain the JSON data contained in the file "path_to_my_json_file".
+// You should be able to just use the variable "jsonData" in your program.
+function getAjaxData(Type, Url, Async, DataType) {
+    $.ajax({
+        type: Type,
+        url: Url,
+        async: Async,
+        dataType: DataType,
+        success: function(Data) {
+            //console.log("ReturnAjaxData: " + JSON.stringify(Data));
+            window.jsonData = JSON.parse(JSON.stringify(Data)); // NOTE: The call "window.jsonData" declares the variable "jsonData" as a global variable.
+        }
+    }).fail(function() {
+        alert("Ajax failed to fetch data");
+    });
+}
+
+
+function instruction(instructionText) {
+    var HTML = '<div class="col-xs-12 col-md-8">';
+    HTML += '<h4 class="instruktion">';
+    HTML += '<div class="col-xs-1  glyphicon glyphicon-arrow-right"></div>';
+    HTML += '<div class="col-xs-11  instructionText">' + instructionText + '</div>';
+    HTML += '</h4>';
+    HTML += '</div>';
+    HTML += '<div class="col-xs-12"></div>';
+
+    return HTML;
+}
+
+
+
+function enable_audio() {
+
+    $("body").append("<audio id='audio_correct' ><source src='../library/sound_effects/correct_new.mp3' type='audio/mpeg'></audio>");
+    $("body").append("<audio id='audio_error' ><source src='../library/sound_effects/error_new.mp3' type='audio/mpeg'></audio>");
+    //$(".container-fluid").prepend("<div class='btn_sound btn_mute btn btn-default'><span class='glyphicons glyphicons-volume-up'></span></div>");
+    //$(".container-fluid").prepend("<div>OST</h1>");//Add html for error and correct
+    //Add sound_off icon 
+
+    console.log("audio enabled");
+
+    //document.getElementById('audio_correct').play();
+    $(".btn_mute").click(function() {
+        if (document.getElementById('audio_correct').muted == false) {
+            document.getElementById('audio_correct').muted = true;
+            document.getElementById('audio_error').muted = true;
+            $(".btn_mute").html("<span class='glyphicons glyphicons-mute'></span>");
+            console.log("off");
+        } else {
+            console.log("on");
+            document.getElementById('audio_correct').muted = false;
+            document.getElementById('audio_error').muted = false;
+            $(".btn_mute").html("<span class='glyphicons glyphicons-volume-up'></span>");
+        }
+
+    });
+    //$(".audio_correct").play();
+
+}
+
+
+function one_line_footer() {
+    //$('.container, .container-fluid').append('<div class="col-xs-12"><h6 class="footerCopywrite"> <a href="../../../kemiC_visningsite/builds/development/om_projektet.html">Digitale læringsmaterialer  Copyright 2015</a></h6></div>')
+    var thisyear = new Date().getFullYear(); // $(".container, .container-fluid").append("<div class='col-xs-12'><h6 class='footerCopywrite'> <a href='../pf_kem2015/om_projektet.html'>Digitale læringsmaterialer  Copyright 2015</a></h6></div>");
+    $(".container, .container-fluid").append("<div class='col-xs-12'><h6 class='footerCopywrite'> <a href='https://www.vucdigital.dk'>© " + thisyear + " vucdigital</a></h6></div>");
+
+
+    //Tjek om scriptet kører på vucdigital, hvis ja: kør google analytics: 
+    if (window.location.href.indexOf("vucdigital.dk") > -1) {
+
+        console.log('googleAnalyticsTest - 1');
+
+        // Hvis cookie'en "vucUdvikling" ikke eksistere, så er det ikke et medlem af udviklingsteamet der besøger siden: aktiver da google analytics:
+        if (!cookieClass.existCookie('vucUdvikling')) {
+
+            console.log('googleAnalyticsTest - 2');
+
+            //$(".container, .container-fluid").append("<div class='col-xs-12 vuc_footer'><h2>Digitale læringsmaterialer på voksenuddannelser</h2><h6 class='footerText'>Udviklet af et produktionsfællesskab mellem otte VUC’er til anvendelse på de deltagende skoler: <br/> Hf og VUC Nordsjælland, VUC Hvidovre-Amager, VUC Roskilde, VUC Vestegnen, VUF, VUC Storstrøm, VUC Aarhus og Københavns VUC (KVUC).</h6> <h6 class='footerCopywrite'> Copyright 2015 </h6></div >");
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-62686407-1', 'auto');
+            ga('send', 'pageview');
+            console.log("GA COMPLETE");
+        } else {
+            $("body").prepend("<div class='label label-success' style='position:absolute;right:0; opacity:0.2' >dev mode</div>");
+            console.log('googleAnalyticsTest - 3');
+        }
+    } else {
+        console.log('googleAnalyticsTest - 4');
+        $("body").prepend("<div class='label label-success' style='position:absolute;right:0; opacity:0.2' >dev mode</div>");
+    }
+}
+
+
+// ##################################################################################################################################################################################################################
+*/
+
+
+
+$(document).on('click touchend', ".centerBtn", function(event) {
+	var btnRef = $(this).attr('data-btnRef');
+	console.log('\ncenterBtn - CLICK - btnRef: ' + btnRef);
+	$('.microhint').remove();
+	UserMsgBox("body", '<div id="userMsgBox_text"></div>');
+	$('.MsgBox_bgr').hide().fadeIn(600);
+	$('#userMsgBox_text').html($(btnRef).html());
+});
+
+
+$(window).resize(function() {
+	ajustDropzoneHeight_template2();
+});
+
+
 $(document).ready(function() {
+	window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
 	window.dropZoneObj = null;
 	window.dropZoneObj_over = null;
 	window.eObj = {
@@ -700,10 +664,10 @@ $(document).ready(function() {
 			var dropZoneArr = [];
 			for (var n in jsonData.dropzone) {
 				if (parseInt(n)!=0) {
-					dropZoneArr.push(jsonData.dropzone[n].attr.id);
+					dropZoneArr.push('#'+jsonData.dropzone[n].attr.id);
 				}
 			}
-			console.log('card - REVERT - dropZoneArr: ' + dropZoneArr);
+			console.log('card - REVERT - dropZoneArr: ' + JSON.stringify(dropZoneArr));
 
             var dropObj = isDropZoneUnderDraggable(dropZoneArr, id);
             console.log('card - REVERT - dropObj: ' + JSON.stringify(dropObj));
@@ -763,8 +727,8 @@ $(document).ready(function() {
 			if ($('#cardPile .card').length == 0) {
 				console.log('step_2_template - INIT');
 
-				alert('RUN TEMPLATE 2');
-				// step_2_template();
+				// alert('RUN TEMPLATE 2');
+				template2();
 			}
 
 		},
@@ -781,6 +745,11 @@ $(document).ready(function() {
             eObj.draggablePos_end = $(this).offset();
 		}
 	});
+
+	// template2();
+
+
+	$('#interface').after('<div id="log"></div>');
 
 });
 

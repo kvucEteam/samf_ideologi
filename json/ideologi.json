@@ -1,7 +1,9 @@
 {
 	"heading": "Genkend en ideologi",
-	"explanation": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, est in feugiat convallis, magna risus sodales neque, sed lobortis sapien justo et erat. ",
-	"instruction": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, est in feugiat convallis, magna risus sodales neque, sed lobortis sapien justo et erat. ",
+	"instruction": "Hvilken ideologi tilhører udsagnet? Flyt tekstudsnittet til den rigtige kategori. Når du har sorteret alle udsagnene, kan du se teksterne i den sammenhæng, de er taget fra.",
+	"explanation": "",
+	"randomizeCards": true,
+	"useQuestionsFromCategory": [0],
 	"dropzone": [
 		{
 			"num": 0, "NOTE": " <--------------------------------  Dette er cardPile - den skal være første element!",
@@ -13,31 +15,37 @@
 			"num": 1,
 			"attr": {"id": "dropzone_1", "class": "dropzone"},
 			"heading": "Socialisme",
-			"defaultText": "Træk et kort her til.",
+			"defaultText": "Hører udsagnet til i socialisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 1",
 				"negative": "Negative general feedback 1"
-			}
+			},
+			"view2_btnText": "Læs tekstudsnittene i sammenhæng",
+			"view2_btnRef" : "#enhedslisten"
 		},
 		{
 			"num": 2,
 			"attr": {"id": "dropzone_2", "class": "dropzone"},
 			"heading": "Konservatisme",
-			"defaultText": "Træk et kort her til.",
+			"defaultText": "Hører udsagnet til i konservatisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 2",
 				"negative": "Negative general feedback 2"
-			}
+			},
+			"view2_btnText": "Læs tekstudsnittene i sammenhæng",
+			"view2_btnRef" : "#konservatisme"
 		},
 		{
 			"num": 3,
 			"attr": {"id": "dropzone_3", "class": "dropzone"},
 			"heading": "Liberalisme",
-			"defaultText": "Træk et kort her til.",
+			"defaultText": "Hører udsagnet til i liberalisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 3",
 				"negative": "Negative general feedback 3"
-			}
+			},
+			"view2_btnText": "Læs tekstudsnittene i sammenhæng",
+			"view2_btnRef" : "#liberal_aliance"
 		}
 	],
 	"category": [
@@ -46,10 +54,11 @@
 			"heading": "Category heading 1",
 			"question": [
 				{
+					"NOTE_1": "=================================================================  Liberalisme  =================================================================",
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Lib). Frie mennesker er forskellige, og det har værdi i sig selv at få lov til at gribe chancen, kæmpe for sin succes og dermed sætte sit eget individuelle præg på sin tilværelse."
+						"text": "Frie mennesker er forskellige, og det har værdi i sig selv at få lov til at gribe chancen, kæmpe for sin succes og dermed sætte sit eget individuelle præg på sin tilværelse."
 					},
 					"correctDropzoneNum": [3],
 					"feedback": {
@@ -60,7 +69,7 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Lib). Du er først og fremmest dig selv og skal måles på din indsats, dine evner og personlighed."
+						"text": "Du er først og fremmest dig selv og skal måles på din indsats, dine evner og personlighed."
 					},
 					"correctDropzoneNum": [3],
 					"feedback": {
@@ -71,18 +80,140 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Lib). Frem for stræben efter materiel lighed kan vi alle høste fordel af vækst, velstand og fremgang i Danmark."
+						"text": "Frem for stræben efter materiel lighed kan vi alle høste fordel af vækst, velstand og fremgang i Danmark."
 					},
 					"correctDropzoneNum": [3],
 					"feedback": {
 						"posetive": "Posetive feedback 1",
 						"negative": "Negative feedback 1"
 					}
-				},{
+				},
+				{
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Kon). Vi er imod, at man kan deponere sit sociale ansvar gennem en skattebillet. For hvis det offentlige overtager for meget af det ansvar, der egentlig er vores eget, mister vi fornemmelsen for ansvar og den nærhed, der ligger i at hjælpe hinanden i familien, blandt venner eller i lokalsamfundet."
+						"text": "Vi har et ansvar for de medborgere, som enten på grund af sygdom, handicap eller uforskyldt ledighed har svært ved at forsørge sig selv. "
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Når staten ikke skal omfordele så store summer mellem det store flertal af velfungerende og selvforsørgende borgere, kan meget bureaukrati afvikles, og den offentlige indsats fokuseres. "
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi vil have et sundhedsvæsen i topform, vi vil have et uddannelsessystem, der giver os et internationalt forspring, og vi vil øge kvaliteten i de kerneydelser, som kommunerne har ansvaret for i dag. Det vil vi gøre ved at give dig mulighed for at vælge lokale løsninger, ved at styrke selvforvaltningen og ved at overlade meget af driften til private."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Livet er vort eget, og vi skal have lov til at bruge det, som vi vil. Friheden er ikke til salg."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi tror på frisind. Når vi må gøre, hvad vi vil, får vi mulighed for at udfolde os på mange forskellige måder. Leve i familier, leve i kollektiver eller leve alene. Enhver må søge lykken på sin egen måde. Vi accepterer andres valg, så længe de ikke skader os."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi ønsker mindre stat og mere privat. En begrænset statsmagt, lav skat, en robust grundlov, uafhængige domstole og klare individuelle rettigheder er en forudsætning for et frit samfund."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Personligt ansvar er en naturlig følge af den personlige frihed. Man er ansvarlig for sine succeser såvel som sine fiaskoer. Ligesom man får mulighed for at høste frugterne af sin egen indsats og succes, må man acceptere at nedsætte sin levestandard, hvis man enten sløser med sine muligheder eller blot er uheldig."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Det fri samfund skaber stor velstand."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi tror på frihed til at disponere over sine egne ressourcer. Ejendomsret og kontraktfrihed er grundlaget for menneskelig virksomhed. Ved at styrke den private ejendomsret skaber vi økonomisk fremdrift og dynamik i samfundet."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Et frit marked uden unødig offentlig indblanding er den bedste garant for, at mennesker kan udvikle sig, eksperimentere og opnå ny viden."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"NOTE_2": "=================================================================  Konservatisme  =================================================================",
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi er imod, at man kan deponere sit sociale ansvar gennem en skattebillet. For hvis det offentlige overtager for meget af det ansvar, der egentlig er vores eget, mister vi fornemmelsen for ansvar og den nærhed, der ligger i at hjælpe hinanden i familien, blandt venner eller i lokalsamfundet."
 					},
 					"correctDropzoneNum": [2],
 					"feedback": {
@@ -93,7 +224,7 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Kon). Vi mener, at et samfund skal måles på, hvordan det behandler de svageste. Derfor arbejder vi for et næstekærligt samfund, hvor reelt udsatte borgere får målrettet hjælp til deres problemer."
+						"text": "Vi mener, at et samfund skal måles på, hvordan det behandler de svageste. Derfor arbejder vi for et næstekærligt samfund, hvor reelt udsatte borgere får målrettet hjælp til deres problemer."
 					},
 					"correctDropzoneNum": [2],
 					"feedback": {
@@ -104,18 +235,92 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Kon). Vi ønsker et samfund, hvor borgerne er trygge både i og uden for deres hjem, og hvor hensynet til offeret altid vejer tungere end hensynet til forbryderen. Vi har længe arbejdet og arbejder fortsat for, at strafniveauet for vold, pædofili, voldtægt og andre personfarlige forbrydelser skærpes."
+						"text": "Vi ønsker et samfund, hvor borgerne er trygge både i og uden for deres hjem, og hvor hensynet til offeret altid vejer tungere end hensynet til forbryderen. Vi har længe arbejdet og arbejder fortsat for, at strafniveauet for vold, pædofili, voldtægt og andre personfarlige forbrydelser skærpes."
 					},
 					"correctDropzoneNum": [2],
 					"feedback": {
 						"posetive": "Posetive feedback 1",
 						"negative": "Negative feedback 1"
 					}
-				},{
+				},
+				{
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Soc). Uligheden vokser, og miljøet ødelægges, både globalt og lokalt. Der skyldes, at vores samfund i dag er indrettet og styret efter, hvordan der skabes mest mulig profit."
+						"text": "Vi mener også, at gentagne forbrydelser skal straffes hårdere, og at der skal slås hårdt ned på de personer, som benytter kriminalitet som en levevej. "
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "ulturen giver os en forståelse af, hvor vi kommer fra, hvor vi er, og hvor vi bevæger os hen. Hvis vi ikke nærer den kunst og kultur, der har skabt og vedvarende skaber Danmark, mister vi vores fælles kulturelle forankring."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi ønsker at sikre bevarelsen af de mange danske kulturklenodier, som skaber en kulturel forståelse i nutidens omskiftelige samfund."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Familie betyder alt. Vi vælger den ikke selv, men den er vores udgangspunkt for resten af livet. Derfor arbejder vi på at give danske familier bedre forhold, så familierne fortsat er en tryg social base, et solidt holdepunkt og rygraden i det danske samfund."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Den kærlighed, man oplever i sin familie, kan ikke erstattes af nogen stat eller offentlig myndighed. "
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Det offentliges tilbud til familier skal være fleksible og tage højde for, at alle familier ikke er ens og ikke har ens arbejdstider. Samtidig skal der være rum til, at det offentlige sammen med det frivillige Danmark kan hjælpe familier med problemer."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"NOTE_3": "=================================================================  Socialisme  =================================================================",
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Uligheden vokser, og miljøet ødelægges, både globalt og lokalt. Der skyldes, at vores samfund i dag er indrettet og styret efter, hvordan der skabes mest mulig profit."
 					},
 					"correctDropzoneNum": [1],
 					"feedback": {
@@ -126,7 +331,7 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Soc). Det er jagten på profit til de få, der kendetegner det kapitalistiske samfund, vi lever i."
+						"text": "Det er jagten på profit til de få, der kendetegner det kapitalistiske samfund, vi lever i."
 					},
 					"correctDropzoneNum": [1],
 					"feedback": {
@@ -137,7 +342,103 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "(Soc). Menneskelivet kan være godt. Det oplever de fleste af os med større eller mindre mellemrum. Især trives vi i hverdagens fællesskaber med familie, kolleger og venner. Vi bliver klogere, gladere og bedre af at være sammen med andre på arbejdspladsen, i skolen og i fritiden."
+						"text": "Menneskelivet kan være godt. Det oplever de fleste af os med større eller mindre mellemrum. Især trives vi i hverdagens fællesskaber med familie, kolleger og venner. Vi bliver klogere, gladere og bedre af at være sammen med andre på arbejdspladsen, i skolen og i fritiden."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Det er, når mennesker organiserer sig sammen, at vi bliver stærke nok til at sikre ordentlige løn- og arbejdsforhold og understøttelse, hvis vi mister arbejdet."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Fællesskab og fælles løsninger er fundamentet for de fremskridt, vi som mennesker har nået."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi vil sætte mennesket frit. Frit for alle former for undertrykkelse. Frit for fattigdom og frygten for økonomisk nød. Frit til at udvikle sig, frit til at vælge sin livsbane og livsstil og frit til at blande sig i samfundets udvikling."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Frihed forudsætter samtidig et stærkt fællesskab. Et fællesskab, hvor alle kan udfolde sig uanset køn, seksualitet, handicap, etnicitet eller religion, og hvor alle mennesker har lige muligheder for at udfolde deres potentialer og livsønsker."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Frihed forudsætter et solidarisk fællesskab, som sikrer hvert enkelt menneskes basale behov såsom mad, tøj, et sted at bo, uddannelse, sundhed og mulighed for et meningsfuldt arbejde."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Frihed forudsætter, at mennesker kan bestemme i deres eget liv. At vi sammen bestemmer ikke bare over frugten af vores arbejde, men også over, hvilke ting der skal laves i vort samfund."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Frihed forudsætter også lighed mellem kønnene. Det har vi ikke i dag – hvilket blandt andet kommer til udtryk i lønforskel mellem mænd og kvinder og stereotype kønsroller der begrænser os."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "En reel frihed for mennesker i stærke og bæredygtige fællesskaber. Det forudsætter et andet samfund end det kapitalistiske, hvor de få, der tilhører en lille elite, bliver rige på alle andres arbejde, og hvor magt og rigdom derfor koncentreres hos et lille mindretal."
 					},
 					"correctDropzoneNum": [1],
 					"feedback": {
