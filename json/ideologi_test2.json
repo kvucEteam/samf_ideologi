@@ -1,0 +1,98 @@
+{
+	"heading": "Genkend en ideologi",
+	"instruction": "Hvilken ideologi tilhører udsagnet? Flyt tekstudsnittet til den rigtige kategori. Når du har sorteret alle udsagnene, kan du se teksterne i den sammenhæng, de er taget fra.",
+	"explanation": "",
+	"randomizeCards": false,
+	"useQuestionsFromCategory": [0],
+	"dropzone": [
+		{
+			"num": 0, "NOTE": " <--------------------------------  Dette er cardPile - den skal være første element!",
+			"attr": {"id": "cardPile", "class": "cardPile"},
+			"heading": "Skal denne have en heading",
+			"defaultText": "Træk kort her til."
+		},
+		{
+			"num": 1,
+			"attr": {"id": "dropzone_1", "class": "dropzone"},
+			"heading": "Socialisme",
+			"defaultText": "Hører udsagnet til i socialisme?",
+			"generalFeedback": {
+				"posetive": "Posetive general feedback 1",
+				"negative": "Negative general feedback 1"
+			},
+			"view2_btnText": "Læs tekstudsnittene i sammenhæng",
+			"view2_btnRef" : "#enhedslisten"
+		},
+		{
+			"num": 2,
+			"attr": {"id": "dropzone_2", "class": "dropzone"},
+			"heading": "Konservatisme",
+			"defaultText": "Hører udsagnet til i konservatisme?",
+			"generalFeedback": {
+				"posetive": "Posetive general feedback 2",
+				"negative": "Negative general feedback 2"
+			},
+			"view2_btnText": "Læs tekstudsnittene i sammenhæng",
+			"view2_btnRef" : "#konservatisme"
+		},
+		{
+			"num": 3,
+			"attr": {"id": "dropzone_3", "class": "dropzone"},
+			"heading": "Liberalisme",
+			"defaultText": "Hører udsagnet til i liberalisme?",
+			"generalFeedback": {
+				"posetive": "Posetive general feedback 3",
+				"negative": "Negative general feedback 3"
+			},
+			"view2_btnText": "Læs tekstudsnittene i sammenhæng",
+			"view2_btnRef" : "#liberal_aliance"
+		}
+	],
+	"category": [
+		{
+			"num": 0,
+			"heading": "Category heading 1",
+			"question": [
+				{
+					"NOTE_1": "=================================================================  Liberalisme  =================================================================",
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Frie mennesker er forskellige, og det har værdi i sig selv at få lov til at gribe chancen, kæmpe for sin succes og dermed sætte sit eget individuelle præg på sin tilværelse."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"NOTE_2": "=================================================================  Konservatisme  =================================================================",
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Vi er imod, at man kan deponere sit sociale ansvar gennem en skattebillet. For hvis det offentlige overtager for meget af det ansvar, der egentlig er vores eget, mister vi fornemmelsen for ansvar og den nærhed, der ligger i at hjælpe hinanden i familien, blandt venner eller i lokalsamfundet."
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"NOTE_3": "=================================================================  Socialisme  =================================================================",
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Uligheden vokser, og miljøet ødelægges, både globalt og lokalt. Der skyldes, at vores samfund i dag er indrettet og styret efter, hvordan der skabes mest mulig profit."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				}
+			]
+		}
+	]
+}

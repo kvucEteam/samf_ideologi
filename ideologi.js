@@ -319,7 +319,8 @@ function template2() {
 	console.log('template2 - windowHeight: ' + windowHeight + ', dropzoneWrapHeight: ' + dropzoneWrapHeight + ', dropzonePercentHeight: ' + dropzonePercentHeight);
 
 	$('#cardPile').append('<div id="microhint_target"> &nbsp; </div>');
-	microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng.', false, '#000');   //   "Flot" "Du kan nu læse sætningerne i deres oprindelige sammenhæng."
+	// microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng.', false, '#000');  
+	microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng.', false, '#000');
 	$('.microhint').hide().fadeIn(600);
 
 	$(".dropzone" ).each(function( index, element ) { 
@@ -328,7 +329,8 @@ function template2() {
 	    	var btnText = jsonData.dropzone[index+1].view2_btnText;
 	    	var btnRef = jsonData.dropzone[index+1].view2_btnRef;
 	    	console.log('template2 - index: ' + index + ', btnText: ' + btnText);
-	    	$(element).after('<span class="centerBtn btn btn-info" data-btnRef="'+btnRef+'">'+btnText+'</span>');
+	    	// $(element).after('<span class="centerBtn btn btn-info" data-btnRef="'+btnRef+'">'+btnText+'</span>');
+	    	$(element).after('<span class="centerBtn btn btn-primary" data-btnRef="'+btnRef+'">'+btnText+'</span>');
 	    	$('.centerBtn').fadeIn(600);
 	    	$(this).remove();
 
@@ -385,7 +387,7 @@ function giveFeedback(cardId, feedbackType) {
 
 }
 
-
+// This function is from "fys_symbol/symbol.js"
 function isDropZoneUnderDraggable(dropZoneArr, draggableId){
 
 	// The following code calculates the midpoint of a draggable entity:
@@ -427,198 +429,28 @@ function isDropZoneUnderDraggable(dropZoneArr, draggableId){
 	return {insideDropzone: false, dropZone: null, dropped: eObj.isCurrentDraggableDropped};
 }
 
-
-// // =====================================================================================================
-// // 		This function is a copy of the "html" method from writeProcessClass.js in danA_skriveproces
-// // =====================================================================================================
-// // This method fetches markup (BUT INTENDED FOR TEXT PRIMERALY) from the DOM by use of a source-selector, and inserts it into the target fields by use of a target-selector.
-// //
-// // ARGUMENTS:
-// // ==========
-// // 		"html(sourceSelector, targetSelector)" or "html('sourceSelector', 'targetSelector')"
-// //
-// // EXAMPLE OF USE: 
-// // ===============
-// // 		To use this method, one writes e.g. "html(#step3_instruction, .instruction)" in the JSON-file
-// function html(json) {
-//     console.log('\nhtml - CALLED');
-//     // var stepObj = jsonData.step[this.api.currentStepNo];
-
-//     var stepObjStr = JSON.stringify(json);
-//     console.log('html - stepObjStr: ' + stepObjStr);
-
-//     var pos_start = stepObjStr.indexOf('html(');
-
-//     var count = 0;
-
-//     while ((pos_start !== -1) && (count < 25)) {
-//         console.log('html - A0');
-
-//         console.log('html - count: ' + count);
-
-//         var pos_end = stepObjStr.indexOf(')"', pos_start);
-
-//         if (pos_end !== -1) {
-//             console.log('html - A1');
-
-//             var argArr = stepObjStr.substring(pos_start + 6, pos_end).replace(/\'/g, '').split(',');
-//             console.log('html - argArr: ' + JSON.stringify(argArr));
-
-//             if (argArr.length == 2) {
-//                 console.log('html - A2');
-
-//                 var source = argArr[0].trim();
-//                 var target = argArr[1].trim();
-//                 console.log('html - source: "' + source + '", target: "' + target + '"');
-
-//                 $(target).html($(source).html());
-//                 // $(source).before('<h4 class="step_clipborad_header">'+source+'</h4>');
-
-//             } else {
-//                 console.log('html - A3');
-
-//                 alert('FEJL FRA: "html(' + stepObjStr.substring(pos_start + 6, pos_end) + ')", som ikke rummer det rigtige antal selectors, som skal være 2.');
-//             }
-//         }
-
-//         pos_start = stepObjStr.indexOf('html(', pos_end);
-//         console.log('html - pos_start: ' + pos_start);
-
-//         ++count;
-//     }
-// }
-
-
-
-// Til bugtest af isDropZoneUnderDraggable():
-// $( document ).on( "mousemove", function( event ) {
-//   $( "#log" ).text( "pageX: " + event.pageX + ", pageY: " + event.pageY );
-// });
-
-
-/*
-// ##################################################################################################################################################################################################################
-
-
-// How to use this function:
-// =========================
-// Call the function from your html-file with the following parameters:
-//
-//      getAjaxData("GET", "path_to_my_json_file", false, "json");
-//
-// - where "path_to_my_json_file" is the path to the JSON-file that needs to be loaded, eg. "json/myJsonFile.json".
-// Just leave the call to the other perameters of the function ("Type", "Async", "DataType") as they are in the above
-// example.
-// 
-// IMPORTANT: 
-// ==========
-// The function call declares the global variable "jsonData" which will contain the JSON data contained in the file "path_to_my_json_file".
-// You should be able to just use the variable "jsonData" in your program.
-function getAjaxData(Type, Url, Async, DataType) {
-    $.ajax({
-        type: Type,
-        url: Url,
-        async: Async,
-        dataType: DataType,
-        success: function(Data) {
-            //console.log("ReturnAjaxData: " + JSON.stringify(Data));
-            window.jsonData = JSON.parse(JSON.stringify(Data)); // NOTE: The call "window.jsonData" declares the variable "jsonData" as a global variable.
-        }
-    }).fail(function() {
-        alert("Ajax failed to fetch data");
-    });
+function make_scoreCounter() {
+	var HTML = '<div id="scoreCounter">';
+	HTML += '<span class="successCounter">'+0+'</span>/<span class="questionsTotal">'+0+'</span> antal forsøg: <span class="attemptCounter">'+0+'</span>';
+	HTML += '</div>';
+	return HTML;
 }
 
 
-function instruction(instructionText) {
-    var HTML = '<div class="col-xs-12 col-md-8">';
-    HTML += '<h4 class="instruktion">';
-    HTML += '<div class="col-xs-1  glyphicon glyphicon-arrow-right"></div>';
-    HTML += '<div class="col-xs-11  instructionText">' + instructionText + '</div>';
-    HTML += '</h4>';
-    HTML += '</div>';
-    HTML += '<div class="col-xs-12"></div>';
+function update_scoreCounter(dObj) {
+	
+	console.log('scoreCounter - dObj 1: ' + JSON.stringify(dObj));
+	if ((dObj.isCurrentDraggableDropped)){
+		dObj.success = (dObj.hasOwnProperty('success'))? dObj.success+1 : 0;
+		dObj.attempt = (dObj.hasOwnProperty('attempt'))? dObj.attempt+1 : 0;
+	}
+	if ((dObj.insideDropzone) && (!dObj.isCurrentDraggableDropped)) {
+		dObj.attempt = (dObj.hasOwnProperty('attempt'))? dObj.attempt+1 : 0;
+	}
+	console.log('scoreCounter - dObj 2: ' + JSON.stringify(dObj));
 
-    return HTML;
+	$('')
 }
-
-
-
-function enable_audio() {
-
-    $("body").append("<audio id='audio_correct' ><source src='../library/sound_effects/correct_new.mp3' type='audio/mpeg'></audio>");
-    $("body").append("<audio id='audio_error' ><source src='../library/sound_effects/error_new.mp3' type='audio/mpeg'></audio>");
-    //$(".container-fluid").prepend("<div class='btn_sound btn_mute btn btn-default'><span class='glyphicons glyphicons-volume-up'></span></div>");
-    //$(".container-fluid").prepend("<div>OST</h1>");//Add html for error and correct
-    //Add sound_off icon 
-
-    console.log("audio enabled");
-
-    //document.getElementById('audio_correct').play();
-    $(".btn_mute").click(function() {
-        if (document.getElementById('audio_correct').muted == false) {
-            document.getElementById('audio_correct').muted = true;
-            document.getElementById('audio_error').muted = true;
-            $(".btn_mute").html("<span class='glyphicons glyphicons-mute'></span>");
-            console.log("off");
-        } else {
-            console.log("on");
-            document.getElementById('audio_correct').muted = false;
-            document.getElementById('audio_error').muted = false;
-            $(".btn_mute").html("<span class='glyphicons glyphicons-volume-up'></span>");
-        }
-
-    });
-    //$(".audio_correct").play();
-
-}
-
-
-function one_line_footer() {
-    //$('.container, .container-fluid').append('<div class="col-xs-12"><h6 class="footerCopywrite"> <a href="../../../kemiC_visningsite/builds/development/om_projektet.html">Digitale læringsmaterialer  Copyright 2015</a></h6></div>')
-    var thisyear = new Date().getFullYear(); // $(".container, .container-fluid").append("<div class='col-xs-12'><h6 class='footerCopywrite'> <a href='../pf_kem2015/om_projektet.html'>Digitale læringsmaterialer  Copyright 2015</a></h6></div>");
-    $(".container, .container-fluid").append("<div class='col-xs-12'><h6 class='footerCopywrite'> <a href='https://www.vucdigital.dk'>© " + thisyear + " vucdigital</a></h6></div>");
-
-
-    //Tjek om scriptet kører på vucdigital, hvis ja: kør google analytics: 
-    if (window.location.href.indexOf("vucdigital.dk") > -1) {
-
-        console.log('googleAnalyticsTest - 1');
-
-        // Hvis cookie'en "vucUdvikling" ikke eksistere, så er det ikke et medlem af udviklingsteamet der besøger siden: aktiver da google analytics:
-        if (!cookieClass.existCookie('vucUdvikling')) {
-
-            console.log('googleAnalyticsTest - 2');
-
-            //$(".container, .container-fluid").append("<div class='col-xs-12 vuc_footer'><h2>Digitale læringsmaterialer på voksenuddannelser</h2><h6 class='footerText'>Udviklet af et produktionsfællesskab mellem otte VUC’er til anvendelse på de deltagende skoler: <br/> Hf og VUC Nordsjælland, VUC Hvidovre-Amager, VUC Roskilde, VUC Vestegnen, VUF, VUC Storstrøm, VUC Aarhus og Københavns VUC (KVUC).</h6> <h6 class='footerCopywrite'> Copyright 2015 </h6></div >");
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-            ga('create', 'UA-62686407-1', 'auto');
-            ga('send', 'pageview');
-            console.log("GA COMPLETE");
-        } else {
-            $("body").prepend("<div class='label label-success' style='position:absolute;right:0; opacity:0.2' >dev mode</div>");
-            console.log('googleAnalyticsTest - 3');
-        }
-    } else {
-        console.log('googleAnalyticsTest - 4');
-        $("body").prepend("<div class='label label-success' style='position:absolute;right:0; opacity:0.2' >dev mode</div>");
-    }
-}
-
-
-// ##################################################################################################################################################################################################################
-*/
 
 
 
@@ -626,7 +458,8 @@ $(document).on('click touchend', ".centerBtn", function(event) {
 	var btnRef = $(this).attr('data-btnRef');
 	console.log('\ncenterBtn - CLICK - btnRef: ' + btnRef);
 	$('.microhint').remove();
-	UserMsgBox("body", '<div id="userMsgBox_text"></div>');
+	// UserMsgBox("body", '<div id="userMsgBox_text"></div>');       // Steen ønsker at klik på userMsgBox ikke lukker userMsgBox'en.
+	UserMsgBox_xclick("body", '<div id="userMsgBox_text"></div>');
 	$('.MsgBox_bgr').hide().fadeIn(600);
 	$('#userMsgBox_text').html($(btnRef).html());
 });
@@ -652,6 +485,7 @@ $(document).ready(function() {
 	setDropzoneEvents();
 	enable_audio();
 
+
 	$( ".card" ).draggable({
 		revert: function(valid) {
 
@@ -672,17 +506,19 @@ $(document).ready(function() {
             var dropObj = isDropZoneUnderDraggable(dropZoneArr, id);
             console.log('card - REVERT - dropObj: ' + JSON.stringify(dropObj));
 
+            // scoreCounter(dropObj);
+
 			// console.log('card - dropZoneObj_over: ' + JSON.stringify(dropZoneObj_over));
 
 			// ATO found the following if-else construct, that solves the error-sound issue. It is a good (but undocumented) way of triggering "events" on drop / not-drop.
 			// SEE:   http://jamesallardice.com/run-a-callback-function-when-a-jquery-ui-draggable-widget-reverts/
 	        if(valid) {
 	            console.log("Dropped in a valid location");
-	            // correct_sound();
+	            correct_sound();
 	        }
 	        else {
 	         console.log("Dropped in a invalid location");
-	         	// error_sound();
+	         	error_sound();
 	        }
 	        return !valid;
 	    },

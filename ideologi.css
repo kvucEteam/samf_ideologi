@@ -176,9 +176,11 @@
 }
 
 #microhint_target {
-	 width: 80%;
+	width: 50%;
 	position: relative;
-	top: 80%;
+	/*top: 80%;*/
+	top: 125%;    /* <----- Quickfix for putting the microhint om the btn*/
+	z-index: -1;
 	/*border: 1px solid red;*/
 }
 
