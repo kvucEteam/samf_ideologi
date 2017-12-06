@@ -473,7 +473,7 @@ $(window).resize(function() {
 
 
 $(document).ready(function() {
-	window.showAnswer_bool = true;		// if "true" the answers will be shown in each card.
+	window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
 	window.dropZoneObj = null;
 	window.dropZoneObj_over = null;
 	window.eObj = {
