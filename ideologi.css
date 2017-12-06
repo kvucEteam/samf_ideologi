@@ -196,3 +196,13 @@
 #UserMsgBox p {
 	margin-bottom: 10px;
 }
+
+.score_container_wrap {
+	padding-bottom: 25px;
+}
+
+.score_container {
+	position: relative;
+	top: 25px;
+    left: 10px;
+}

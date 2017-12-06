@@ -69,6 +69,8 @@ function makeCardPile(){  							// ADDED d. 04-12-2017
 	// questionObj = (randomize)? ShuffelArray(questionObj) : questionObj;  // This randomizes the questionObj array 				// COMMENTED OUT d. 04-12-2017
 	questionObj = (jsonData.randomizeCards)? ShuffelArray(questionObj) : questionObj;  // This randomizes the questionObj array 	// ADDED d. 04-12-2017
 
+	window.numOfQuestions = questionObj.length;
+
 	console.log('makeCardPile - questionObj 2: ' + JSON.stringify(questionObj, null, 4));
 	// console.log('questionObj 2: ' + JSON.stringify(subQuestions));
 
@@ -430,26 +432,26 @@ function isDropZoneUnderDraggable(dropZoneArr, draggableId){
 }
 
 function make_scoreCounter() {
-	var HTML = '<div id="scoreCounter">';
-	HTML += '<span class="successCounter">'+0+'</span>/<span class="questionsTotal">'+0+'</span> antal forsøg: <span class="attemptCounter">'+0+'</span>';
-	HTML += '</div>';
-	return HTML;
+	return '<div class="score_container_wrap"><div class="score_container"><span class="scoreText">Korrekte svar: </span><span class="QuestionCounter QuestionTask"><span class="success">0</span> ud af '+numOfQuestions+'</span> <span class="scoreText"> Forsøg: </span><span class="ErrorCount QuestionTask attempt">0</span></div><div class="Clear"></div></div>';
 }
 
 
 function update_scoreCounter(dObj) {
 	
-	console.log('scoreCounter - dObj 1: ' + JSON.stringify(dObj));
-	if ((dObj.isCurrentDraggableDropped)){
-		dObj.success = (dObj.hasOwnProperty('success'))? dObj.success+1 : 0;
-		dObj.attempt = (dObj.hasOwnProperty('attempt'))? dObj.attempt+1 : 0;
+	console.log('update_scoreCounter - dObj 1: ' + JSON.stringify(dObj));
+	if ((dObj.dropped)){
+		console.log('update_scoreCounter - A0');
+		++eObj.success;
+		++eObj.attempt;
 	}
-	if ((dObj.insideDropzone) && (!dObj.isCurrentDraggableDropped)) {
-		dObj.attempt = (dObj.hasOwnProperty('attempt'))? dObj.attempt+1 : 0;
+	if ((dObj.insideDropzone) && (!dObj.dropped)) {
+		console.log('update_scoreCounter - A1');
+		++eObj.attempt;
 	}
-	console.log('scoreCounter - dObj 2: ' + JSON.stringify(dObj));
+	console.log('update_scoreCounter - dObj 2: ' + JSON.stringify(dObj));
 
-	$('')
+	$('.success').html(eObj.success);
+	$('.attempt').html(eObj.attempt);
 }
 
 
@@ -471,19 +473,20 @@ $(window).resize(function() {
 
 
 $(document).ready(function() {
-	window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
+	window.showAnswer_bool = true;		// if "true" the answers will be shown in each card.
 	window.dropZoneObj = null;
 	window.dropZoneObj_over = null;
 	window.eObj = {
-		// insideDropzone:  true/false  			// Tells if the draggable is inside at the time of the drop.
-		// dropZone: id 							// The id of the dropzone.
-		// isCurrentDraggableDropped: true/false 	// Tells if the draggable was dropped. 
+		success: 0, 
+		attempt: 0 
 	};
 	setCardId();
 	$('#interface').html(template());
 	organizeCardPile('#cardPile',5, 10);
 	setDropzoneEvents();
 	enable_audio();
+
+	$('#interface').append(make_scoreCounter());
 
 
 	$( ".card" ).draggable({
@@ -506,7 +509,7 @@ $(document).ready(function() {
             var dropObj = isDropZoneUnderDraggable(dropZoneArr, id);
             console.log('card - REVERT - dropObj: ' + JSON.stringify(dropObj));
 
-            // scoreCounter(dropObj);
+            update_scoreCounter(dropObj);
 
 			// console.log('card - dropZoneObj_over: ' + JSON.stringify(dropZoneObj_over));
 
