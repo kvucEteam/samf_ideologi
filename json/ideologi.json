@@ -1,6 +1,6 @@
 {
 	"heading": "Genkend en ideologi",
-	"instruction": "Hvilken ideologi tilhører udsagnet? Flyt tekstudsnittet til den rigtige kategori. Når du har sorteret alle udsagnene, kan du se teksterne i den sammenhæng, de er taget fra.",
+	"instruction": "Hvilken ideologi tilhører udsagnet? Flyt sætningerne til den rigtige kategori. Når du har sorteret alle udsagnene, kan du se de enkelte tekstudsnit i den ideologiske sammenhæng, de er taget fra.",
 	"explanation": "",
 	"randomizeCards": true,
 	"useQuestionsFromCategory": [0],
