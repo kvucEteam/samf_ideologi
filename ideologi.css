@@ -82,9 +82,7 @@
 	/*margin: 10px;*/
 }
 
-.dropzoneHeading {
-	margin-left: 2%;
-}
+
 
 /*
 .cardzone {
@@ -131,6 +129,12 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.centerBtnText {
+	margin-left: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .centerBtn {
@@ -206,3 +210,270 @@
 	top: 25px;
     left: 10px;
 }
+
+.dropzoneHeading {
+	margin-left: 2%;
+	/*display: inline-block;*/
+}
+
+.dropzoneHeading span{
+	padding: 5px 10px 5px 10px;
+    border-radius: 4px;
+}
+
+
+/* 5e8bb1, 91ad9c, eb7f81 */
+
+.dropzone_template2 {
+	position: relative;
+	/*top: -21%;*/
+    width: 87%;
+    margin-top: 17px;
+    min-height: initial;
+}
+
+#tryAgain {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+
+#socialisme .labelColor{
+	background-color: #eb7f81;  
+}
+
+#konservatisme .labelColor {
+	background-color: #91ad9c;
+}
+
+#liberalisme .labelColor {
+	background-color: #5e8bb1;
+}
+
+.cardColor{
+	display: none;
+}
+
+#socialisme .cardColor {
+	background-color: #eabebe;
+}
+
+#konservatisme .cardColor {
+	background-color: #afd1bc;
+}
+
+#liberalisme .cardColor {
+	background-color: #96b4cc;
+}
+
+
+
+/*******************************************************************************
+						Media queries
+*******************************************************************************/
+
+@media (max-width: 450px) {
+
+	#cardPile {
+		top: 10%;
+		left: 0%;
+	}
+
+	.dropzone_template2 {
+		/*top: -4%;*/
+	}
+
+	.dropzoneHeading {
+		font-size: 1.5em;
+	}
+
+	.card {
+	    font-size: 0.59em;
+	    padding: 10px;
+	}
+
+	.centerBtn {
+		font-size: 0.6em;
+	}
+
+	.centerBtnText {
+		font-size: 0.6em;
+	}
+
+	.score_container_wrap{
+		top: 40px;
+	}
+
+}
+
+@media (min-width: 451px) and (max-width: 500px) {
+
+	#cardPile {
+		top: 10%;
+		left: 0%;
+	}
+
+	.dropzone_template2 {
+		/*top: -4%;*/
+	}
+
+	.dropzoneHeading {
+		font-size: 1.5em;
+	}
+
+	.card {
+	    font-size: 0.62em;
+	    padding: 10px;
+	}
+
+	.centerBtn {
+		font-size: 0.65em;
+	}
+
+	.centerBtnText {
+		font-size: 0.65em;
+	}
+
+	.score_container{
+		top: 40px;
+	}
+
+}
+
+@media (min-width: 501px) and (max-width: 600px) {
+
+	#cardPile {
+		top: 10%;
+		left: 0%;
+	}
+
+	.dropzone_template2 {
+		/*top: -4%;*/
+	}
+
+	.dropzoneHeading {
+		font-size: 1.5em;
+	}
+
+	.card {
+	    font-size: 0.65em;
+	    padding: 10px;
+	}
+
+	.centerBtn {
+		font-size: 0.7em;
+	}
+
+	.centerBtnText {
+		font-size: 0.7em;
+	}
+
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+
+	#cardPile {
+		top: 10%;
+		left: 0%;
+	}
+
+	.dropzone_template2 {
+		/*top: -4%;*/
+	}
+
+	.dropzoneHeading {
+		font-size: 1.5em;
+	}
+
+	.card {
+	    font-size: 0.72em;
+	    padding: 10px;
+	}
+
+	.Clone {
+		margin-left: 5%;
+	}
+
+	.centerBtn {
+		font-size: 0.9em;
+	}
+
+	.centerBtnText {
+		font-size: 0.9em;
+	}
+
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+
+	#cardPile {
+		top: 10%;
+		left: 0%;
+	}
+
+	.dropzone_template2 {
+		/*top: -5%;*/
+	}
+
+	.dropzoneHeading {
+		font-size: 1.5em;
+	}
+
+	.card {
+	    font-size: 0.8em;
+	    padding: 10px;
+	}
+
+	.Clone {
+		margin-left: 5%;
+	}
+
+	.centerBtn {
+		font-size: 1.1em;
+	}
+
+	.centerBtnText {
+		font-size: 1em;
+	}
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	#cardPile {
+		top: 10%;
+		left: 0%;
+	}
+
+	.dropzone_template2 {
+		/*top: -6%;*/
+	}
+
+	.dropzoneHeading {
+		font-size: 1.5em;
+	}
+
+	.card {
+	    font-size: 1em;
+	    padding: 10px;
+	}
+
+	.Clone {
+		margin-left: 5%;
+	}
+
+}
+
+@media (min-width: 1200px) {
+	.Clone {
+		margin-left: 5%;
+	}
+
+	.dropzone_template2 {
+		/*top: -21%;*/
+	}
+}
+
+

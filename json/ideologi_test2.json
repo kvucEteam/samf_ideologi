@@ -15,6 +15,7 @@
 			"num": 1,
 			"attr": {"id": "dropzone_1", "class": "dropzone"},
 			"heading": "Socialisme",
+			"headingId": "socialisme",
 			"defaultText": "Hører udsagnet til i socialisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 1",
@@ -27,6 +28,7 @@
 			"num": 2,
 			"attr": {"id": "dropzone_2", "class": "dropzone"},
 			"heading": "Konservatisme",
+			"headingId": "konservatisme",
 			"defaultText": "Hører udsagnet til i konservatisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 2",
@@ -39,6 +41,7 @@
 			"num": 3,
 			"attr": {"id": "dropzone_3", "class": "dropzone"},
 			"heading": "Liberalisme",
+			"headingId": "liberalisme",
 			"defaultText": "Hører udsagnet til i liberalisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 3",
@@ -58,7 +61,19 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "Frie mennesker er forskellige, og det har værdi i sig selv at få lov til at gribe chancen, kæmpe for sin succes og dermed sætte sit eget individuelle præg på sin tilværelse."
+						"text": "Vi vil have et sundhedsvæsen i topform, vi vil have et uddannelsessystem, der giver os et internationalt forspring, og vi vil øge kvaliteten i de kerneydelser, som kommunerne har ansvaret for i dag. Det vil vi gøre ved at give dig mulighed for at vælge lokale løsninger, ved at styrke selvforvaltningen og ved at overlade meget af driften til private."
+					},
+					"correctDropzoneNum": [3],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Det fri samfund skaber stor velstand."
 					},
 					"correctDropzoneNum": [3],
 					"feedback": {
@@ -80,11 +95,35 @@
 					}
 				},
 				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Den kærlighed, man oplever i sin familie, kan ikke erstattes af nogen stat eller offentlig myndighed. "
+					},
+					"correctDropzoneNum": [2],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
 					"NOTE_3": "=================================================================  Socialisme  =================================================================",
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
-						"text": "Uligheden vokser, og miljøet ødelægges, både globalt og lokalt. Der skyldes, at vores samfund i dag er indrettet og styret efter, hvordan der skabes mest mulig profit."
+						"text": "Menneskelivet kan være godt. Det oplever de fleste af os med større eller mindre mellemrum. Især trives vi i hverdagens fællesskaber med familie, kolleger og venner. Vi bliver klogere, gladere og bedre af at være sammen med andre på arbejdspladsen, i skolen og i fritiden."
+					},
+					"correctDropzoneNum": [1],
+					"feedback": {
+						"posetive": "Posetive feedback 1",
+						"negative": "Negative feedback 1"
+					}
+				},
+				{
+					"type": "text",
+					"text": {
+						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"text": "Fællesskab og fælles løsninger er fundamentet for de fremskridt, vi som mennesker har nået."
 					},
 					"correctDropzoneNum": [1],
 					"feedback": {

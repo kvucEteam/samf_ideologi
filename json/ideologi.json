@@ -15,6 +15,7 @@
 			"num": 1,
 			"attr": {"id": "dropzone_1", "class": "dropzone"},
 			"heading": "Socialisme",
+			"headingId": "socialisme",
 			"defaultText": "Hører udsagnet til i socialisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 1",
@@ -27,6 +28,7 @@
 			"num": 2,
 			"attr": {"id": "dropzone_2", "class": "dropzone"},
 			"heading": "Konservatisme",
+			"headingId": "konservatisme",
 			"defaultText": "Hører udsagnet til i konservatisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 2",
@@ -39,6 +41,7 @@
 			"num": 3,
 			"attr": {"id": "dropzone_3", "class": "dropzone"},
 			"heading": "Liberalisme",
+			"headingId": "liberalisme",
 			"defaultText": "Hører udsagnet til i liberalisme?",
 			"generalFeedback": {
 				"posetive": "Posetive general feedback 3",

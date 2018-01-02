@@ -27,7 +27,8 @@ function organizeCardPile(parentContainer, hideAboveNo, marginTop) {  // <------
 		// $(element).css({"position": "absolute", "top": String(margin+pcPosition.top)+'px', "left": String(margin+10)+'px', "z-index": index, "margin-top": marginTop+'%'});
 		
 		// $(element).css({"position": "absolute", "top": String(margin+0)+'px', "left": String(margin+10)+'px', "z-index": index});  	// COMMENTED OUT 04-12-2017
-		$(element).css({"position": "absolute", "top": String(margin+5)+'px', "left": String(margin+25)+'px', "z-index": index});		// ADDED 04-12-2017
+		// $(element).css({"position": "absolute", "top": String(margin+5)+'px', "left": String(margin+25)+'px', "z-index": index});		// ADDED 04-12-2017
+		$(element).css({"position": "absolute", "top": String(margin+0)+'px', "left": String(margin+0)+'px', "z-index": index});		// ADDED 21-12-2017
 		
 	}); 
 }
@@ -140,8 +141,8 @@ function setDropzoneEvents() {
 					eObj.isCurrentDraggableDropped = true;
 				},
 				over: function( event, ui ) {
-					console.log()
-					window.dropZoneObj_over = $(this);
+					console.log('droppable - over - ui.position.top: ' + ui.position.top + ', ui.position.left: ' + ui.position.left);
+					window.dropZoneObj_over = $(this);	
 				}
 			});
 		} else {
@@ -248,7 +249,9 @@ function SimpleClone(TargetSelector) {
         'top': 'auto',
         'left': 'auto',
         'height': '83%', // <---- NEW
-        'width': '80%'    // <---- NEW
+        'width': '80%',    // <---- NEW
+        'top': '10%',
+        'left': '10%'
     }); // This is necessary for cloning inside the droppable to work properly!!!
     // Clone = Clone.removeAttr("id").removeClass("ui-draggable ui-draggable-handle ui-draggable-dragging"); // This just cleans the attributes so the DOM-element looks nicer.
     Clone = Clone.removeClass("ui-draggable ui-draggable-handle ui-draggable-dragging"); // This just cleans the attributes so the DOM-element looks nicer.
@@ -262,7 +265,8 @@ function template() {
 
 	var HTML = '';
 	HTML += '<h1>'+jsonData.heading+'</h1>';
-	HTML += (jsonData.hasOwnProperty('instruction') && (jsonData.instruction!==''))? instruction(jsonData.instruction) : '';
+	// HTML += (jsonData.hasOwnProperty('instruction') && (jsonData.instruction!==''))? instruction(jsonData.instruction) : '';
+	HTML += (jsonData.hasOwnProperty('instruction') && (jsonData.instruction!==''))? instruction_noLines(jsonData.instruction) : '';
 	HTML += (jsonData.hasOwnProperty('explanation') && (jsonData.explanation!==''))? explanation(jsonData.explanation) : '';
 	HTML += '<div class="Clear"></div>';
 	HTML += '<div id="cardContainer">';
@@ -298,7 +302,7 @@ function template() {
 				HTML += '<div id="cardPileWrap"><div '+generateAttrStr(jsonData.dropzone[k].attr)+'>'+makeCardPile()+' &nbsp; </div></div>'; 	 // ADDED d. 04-12-2017
 			} else {
 				HTML += '<div class="dropzoneWrap">';
-				HTML += 	'<h3 class="dropzoneHeading">'+jsonData.dropzone[k].heading+'</h3>';
+				HTML += 	'<h3'+((jsonData.dropzone[k].hasOwnProperty('headingId'))? ' id="'+jsonData.dropzone[k].headingId+'"' : '' )+' class="dropzoneHeading"><span class="labelColor">'+jsonData.dropzone[k].heading+'</span><span class="cardColor"></span></h3>';
 				// HTML += 	'<div '+generateAttrStr(jsonData.dropzone[k].attr)+'>&nbsp;</div>';
 				HTML += 	'<div '+generateAttrStr(jsonData.dropzone[k].attr)+'> <span class="centerText">'+((jsonData.dropzone[k].hasOwnProperty('defaultText') && jsonData.dropzone[k].defaultText!='')? jsonData.dropzone[k].defaultText : '')+'</span></div>';
 				HTML += '</div>';
@@ -322,7 +326,7 @@ function template2() {
 
 	$('#cardPile').append('<div id="microhint_target"> &nbsp; </div>');
 	// microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng.', false, '#000');  
-	microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng.', false, '#000');
+	// microhint($('#microhint_target'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætnigerne i deres oprindelige sammenhæng. Eller prøve opgaven én gang til.', false, '#000');
 	$('.microhint').hide().fadeIn(600);
 
 	$(".dropzone" ).each(function( index, element ) { 
@@ -332,7 +336,7 @@ function template2() {
 	    	var btnRef = jsonData.dropzone[index+1].view2_btnRef;
 	    	console.log('template2 - index: ' + index + ', btnText: ' + btnText);
 	    	// $(element).after('<span class="centerBtn btn btn-info" data-btnRef="'+btnRef+'">'+btnText+'</span>');
-	    	$(element).after('<span class="centerBtn btn btn-primary" data-btnRef="'+btnRef+'">'+btnText+'</span>');
+	    	$(element).after('<div class="centerBtnText">Vil du læse de ideologiske sætninger i den sammenhæng, hvorfra de er taget?</div> <span class="centerBtn btn btn-primary" data-btnRef="'+btnRef+'">'+btnText+'</span>');
 	    	$('.centerBtn').fadeIn(600);
 	    	$(this).remove();
 
@@ -340,6 +344,9 @@ function template2() {
 	    	$('.dropzoneWrap').height(dropzoneWrapHeight);  // 
 	    });
 	});
+
+	$('#cardPileWrap').html('<div class="dropzone dropzone_template2"><span id="tryAgain" class="btn btn-primary">Prøv igen</span></div>');
+	microhint($('#tryAgain'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætnigerne i deres oprindelige sammenhæng. Eller prøve opgaven én gang til.', false, '#000');
 
 	window.ajustDropzoneHeight = true;;
 }
@@ -467,13 +474,34 @@ $(document).on('click touchend', ".centerBtn", function(event) {
 });
 
 
+
+$(document).on('click touchend', "#tryAgain", function(event) {
+	location.reload();
+});
+
+
+// IE 11 (edge) på windows 7 på KVUC havde problemer med anvendelse global regex med variabel search/replace i august 2017. 
+// Derfor er denne funktion lavet uden global regex med variabel search/replace. 
+function globalReplace(str, strSearch, strReplace) {
+    console.log('wiki - globalReplace - str 1: ' + str);
+    var pos = str.indexOf(strSearch);
+    while (pos !== -1) {
+        str = str.substring(0, pos) + strReplace + str.substring(pos+strSearch.length);
+        pos = str.indexOf(strSearch, pos+strReplace.length);
+    }
+    console.log('wiki - globalReplace - str 2: ' + str);
+}
+var testStr = 'abcdefg_abcdefg_abcdefg';
+globalReplace(testStr, 'abc', '123');
+
+
 $(window).resize(function() {
 	ajustDropzoneHeight_template2();
 });
 
 
 $(document).ready(function() {
-	window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
+	window.showAnswer_bool = true;		// if "true" the answers will be shown in each card.
 	window.dropZoneObj = null;
 	window.dropZoneObj_over = null;
 	window.eObj = {
@@ -518,6 +546,15 @@ $(document).ready(function() {
 	        if(valid) {
 	            console.log("Dropped in a valid location");
 	            correct_sound();
+
+	            // {insideDropzone: false, dropZone: null, dropped: eObj.isCurrentDraggableDropped};
+	            // $('#'+id).css({'background-color': '#F00'});
+	            var parent = $('#'+id).closest('.dropzoneHeading').prop('id'); //  css('background-color');
+	            // var Tid = $('.dropzoneHeading', parent).prop('id');
+	            console.log('card - REVERT - parent: ' + parent);
+	            // $('#'+id).css();
+
+
 	        }
 	        else {
 	         console.log("Dropped in a invalid location");
@@ -543,7 +580,7 @@ $(document).ready(function() {
 
 				$(dropZoneObj).append(SimpleClone($(this)).addClass("Clone"));  // Append the cloned card to dropzone
 				$(this).remove();												// Remove the original card
-				organizeCardPile('#'+dropId, 5, 0);
+				organizeCardPile('#'+dropId, 3, 0);
 				
 				// if (dropId == 'wasteBin') {
 				// 	$('.glyphicons-bin').css({'opacity':'0'});
@@ -551,10 +588,20 @@ $(document).ready(function() {
 				// 	$( '#'+dropId+' .card' ).last().animate({ opacity: 0.40}, 1000);
 				// } 
 
+				var id = $(this).attr('id');
+				var tag = dropZoneObj.prev();
+				// var bgColor = $('span', tag).css('background-color');
+				var bgColor = $('.cardColor', tag).css('background-color');
+	            console.log('card - REVERT - bgColor: ' + bgColor);
+	            $('#'+id).animate({'background-color': bgColor}, 500); 
+
+
 				dropZoneObj = null;  // Reset dropZoneObj...
 
 				// console.log('card - CORRECT ');
-				// correct_sound();                        
+				// correct_sound(); 
+
+
 			} 
 			else {  // If student answer is wrong...
 
@@ -567,7 +614,9 @@ $(document).ready(function() {
 				console.log('step_2_template - INIT');
 
 				// alert('RUN TEMPLATE 2');
-				template2();
+				setTimeout(function() {
+					template2();
+				}, 1000);
 			}
 
 		},
