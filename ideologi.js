@@ -346,7 +346,7 @@ function template2() {
 	});
 
 	$('#cardPileWrap').html('<div class="dropzone dropzone_template2"><span id="tryAgain" class="btn btn-primary">Prøv igen</span></div>');
-	microhint($('#tryAgain'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætnigerne i deres oprindelige sammenhæng. Eller prøve opgaven én gang til.', false, '#000');
+	microhint($('#tryAgain'), '<div class="microhint_label_success">Flot</div> Du kan nu læse sætningerne i deres oprindelige sammenhæng. Eller prøve opgaven én gang til.', false, '#000');
 
 	window.ajustDropzoneHeight = true;;
 }
@@ -470,6 +470,8 @@ $(document).on('click touchend', ".centerBtn", function(event) {
 	// UserMsgBox("body", '<div id="userMsgBox_text"></div>');       // Steen ønsker at klik på userMsgBox ikke lukker userMsgBox'en.
 	UserMsgBox_xclick("body", '<div id="userMsgBox_text"></div>');
 	$('.MsgBox_bgr').hide().fadeIn(600);
+	var HTML = $(btnRef).html();
+	console.log('centerBtn - CLICK - HTML: ' + HTML);
 	$('#userMsgBox_text').html($(btnRef).html());
 });
 
@@ -501,7 +503,7 @@ $(window).resize(function() {
 
 
 $(document).ready(function() {
-	window.showAnswer_bool = true;		// if "true" the answers will be shown in each card.
+	window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
 	window.dropZoneObj = null;
 	window.dropZoneObj_over = null;
 	window.eObj = {
