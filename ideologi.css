@@ -20,6 +20,7 @@
     padding: 20px;
     /*position: absolute;*/
     /*width: 100%;*/
+    overflow: hidden;  /*Tilføjet d. 12/1-2018*/
 }
 
 .cardContent {
