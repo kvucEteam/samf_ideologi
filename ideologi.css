@@ -259,15 +259,15 @@
 	display: none;
 }
 
-#socialisme .cardColor {
+.textColor_social, #socialisme .cardColor {
 	background-color: #eabebe;
 }
 
-#konservatisme .cardColor {
+.textColor_konservativ, #konservatisme .cardColor {
 	background-color: #afd1bc;
 }
 
-#liberalisme .cardColor {
+.textColor_liberal, #liberalisme .cardColor {
 	background-color: #96b4cc;
 }
 

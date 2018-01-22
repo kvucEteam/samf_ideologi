@@ -262,6 +262,7 @@
 					"type": "text",
 					"text": {
 						"attr": {"id": "id_0", "class": "textWrap cardContent"},
+						"NOTE": "Nedenstående tekst er ikke ordret som i hovedteksten i html-filen!",
 						"text": "Kulturen giver os en forståelse af, hvor vi kommer fra, hvor vi er, og hvor vi bevæger os hen. Hvis vi ikke nærer den kunst og kultur, der har skabt og vedvarende skaber Danmark, mister vi vores fælles kulturelle forankring."
 					},
 					"correctDropzoneNum": [2],
