@@ -462,17 +462,95 @@ function update_scoreCounter(dObj) {
 }
 
 
+// HTML += 		'<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />';
+// 	HTML += 		'<style type="text/css">';
+// 	HTML += 			'body {font-family: OpenSans,Helvetica,Arial,sans-serif;}';
+
+
+function wordTemplate(injectedHtml) {
+	var HTML = '';
+	HTML += '<!DOCTYPE html>';
+	HTML += '<html>';
+	HTML += 	'<head>';
+	HTML += 	'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';  // Fixes issue with danish characters on Internet Explore 
+	// HTML += 		'<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />';  // Dette virker ikke!
+	HTML += 		'<style type="text/css">';
+	HTML += 			'body {font-family: "Times New Roman", Times, serif;}';
+	HTML += 			'p {font-size: 16px; margin-bottom: 5px}';
+	HTML += 			'.textColor_social { background-color: #eabebe;}';
+	HTML += 			'.textColor_konservativ {background-color: #afd1bc;}';
+	HTML += 			'.textColor_liberal {background-color: #96b4cc;}';
+	HTML += 			'.boldText {font-weight: 700;}';
+	// HTML += 			'p {margin-bottom: 10px;}';
+	HTML += 			'h2 {margin-bottom: 20px;}';
+	HTML += 			'a {color: #05a0a8; font-weight: 400;}';
+	HTML += 		'</style>';
+	HTML += 	'</head>';
+	HTML += 	'<body>';
+	HTML += 	injectedHtml;
+	HTML += 	'</body>';
+	HTML += '</html>';
+	// document.write(HTML);
+	return HTML;
+}
+
+// ADDED 16/3-2018 - HTML-to-Word-conversion by PHP
+// The btn #submit by input type="submit" has a diffrent CSS-style... therefore another btn .download is used and click on the #submit btn.
+function download() {  
+	var HTML = '';
+	HTML += '<form action="htmlToWord.php" method="post">';
+    HTML += 	'<input type="hidden" name="fileName" id="hiddenField" value="Debat" />';
+    HTML += 	'<input id="html" type="hidden" name="html" id="hiddenField" />';
+    HTML += 	'<input id="submit" type="submit" class="btn btn-info" value="Konverter" onclick="clearInterval(downloadTimer);">';  // <---- NOTE: The "downloadTimer" is cleared here!
+    HTML += '</form>';
+    // $('#interface').append(HTML);
+
+    return HTML;
+}
+
+// ADDED 16/3-2018 - HTML-to-Word-conversion by PHP
+// If this is not present, some browseres starts to download an empty htmlToWord.php file instead of the intended .docx file.
+$( document ).on('click', '#submit', function(){  
+    console.log('#submit - CLICKED - submit');
+    $('#html').val(wordTemplate($('#politicalText').html()));
+});
+
+// ADDED 16/3-2018 - HTML-to-Word-conversion by PHP
+// Some browsers need two clicks on the ".download" btn before the download starts. Therefore a timer is set to loop untill the variable "downloadTimer" is cleared.
+// $( document ).on('click', '.download', function(){   
+$( document ).on('click', '.download', function(){    
+	console.log('.download - CLICKED - submit');
+    window.Tcount = 0;
+	window.downloadTimer = setInterval(function(){  // <---- NOTE: The "downloadTimer" is cleared inline in the input-tag "#submit"
+		$('#submit').trigger('click');
+		++Tcount;
+		console.log('download - CLICKED - Tcount: ' + Tcount);
+	}, 200);
+});
+
+
+// $(document).on('click touchend', ".centerBtn", function(event) {
+// 	var btnRef = $(this).attr('data-btnRef');
+// 	console.log('\ncenterBtn - CLICK - btnRef: ' + btnRef);
+// 	$('.microhint').remove();
+// 	// UserMsgBox("body", '<div id="userMsgBox_text"></div>');       // Steen ønsker at klik på userMsgBox ikke lukker userMsgBox'en.
+// 	UserMsgBox_xclick("body", '<div id="userMsgBox_text"></div>');
+// 	$('.MsgBox_bgr').hide().fadeIn(600);
+// 	var HTML = $(btnRef).html();
+// 	console.log('centerBtn - CLICK - HTML: ' + HTML);
+// 	$('#userMsgBox_text').html($(btnRef).html());
+// });
 
 $(document).on('click touchend', ".centerBtn", function(event) {
 	var btnRef = $(this).attr('data-btnRef');
 	console.log('\ncenterBtn - CLICK - btnRef: ' + btnRef);
 	$('.microhint').remove();
 	// UserMsgBox("body", '<div id="userMsgBox_text"></div>');       // Steen ønsker at klik på userMsgBox ikke lukker userMsgBox'en.
-	UserMsgBox_xclick("body", '<div id="userMsgBox_text"></div>');
+	UserMsgBox_xclick("body", '<div id="userMsgBox_text"><div id="politicalText"></div><div class="download btn btn-primary">Download som Word</div>'+download()+'</div>');
 	$('.MsgBox_bgr').hide().fadeIn(600);
 	var HTML = $(btnRef).html();
 	console.log('centerBtn - CLICK - HTML: ' + HTML);
-	$('#userMsgBox_text').html($(btnRef).html());
+	$('#politicalText').html($(btnRef).html());
 });
 
 
@@ -480,6 +558,63 @@ $(document).on('click touchend', ".centerBtn", function(event) {
 $(document).on('click touchend', "#tryAgain", function(event) {
 	location.reload();
 });
+
+
+function returnLastStudentSession() {
+	window.osc = Object.create(objectStorageClass);
+	osc.init('studentSession');
+	osc.exist('jsonData');
+
+	// var TjsonData = osc.load('jsonData');
+	var TjsonData = osc.load('jsonData_samf_ideologi');
+	console.log('returnLastStudentSession - TjsonData: ' + JSON.stringify(TjsonData));
+	
+	if ((TjsonData !== null) && (typeof(TjsonData) !== 'undefined')){
+		console.log('returnLastStudentSession - getTimeStamp: ' + osc.getTimeStamp());
+	// if (TjsonData !== null){
+		var HTML = '';
+		HTML += '<h4>OBS</h4> Du har lavet denne øvelse før og indtastet data allerede.';
+		HTML += '<div> <span id="objectStorageClass_yes" class="objectStorageClass btn btn-info">Jeg vil fortsætte, hvor jeg slap</span> <span id="objectStorageClass_no" class="objectStorageClass btn btn-info">Jeg vil starte forfra</span> </div>';
+		UserMsgBox("body", HTML);
+
+		$('.CloseClass').remove(); // <---- removes the "X" in the UserMsgBox.
+		$('.container-fluid').hide();  // Hide all program-content.
+
+	    $('#UserMsgBox').unbind('click');
+	    $('.MsgBox_bgr').unbind('click');
+
+	    $( document ).on('click', "#objectStorageClass_yes", function(event){
+	        console.log("objectStorageClass.init - objectStorageClass_yes - CLICK" );
+	        $(".MsgBox_bgr").fadeOut(200, function() {
+	            $(this).remove();
+	            $('.container-fluid').fadeIn('slow');  // Fade in all program-content.
+	        });
+	       
+	        // jsonData = TjsonData;
+	        initQuiz();
+	        setTimeout(function(){ 
+	        	template2();
+	        	$('.success').text(jsonData.category[0].question.length);
+	        	$('.attempt').text(jsonData.category[0].question.length);
+	        }, 200);
+			
+	    });
+
+	    $( document ).on('click', "#objectStorageClass_no", function(event){
+	    	// osc.stopAutoSave('test1');
+	        console.log("objectStorageClass.init - objectStorageClass_no - CLICK" );
+	        osc.delete(osc.localStorageObjName);
+	        $(".MsgBox_bgr").fadeOut(200, function() {
+	            $(this).remove();
+	            $('.container-fluid').fadeIn('slow');  // Fade in all program-content.
+	        });
+
+	        initQuiz();
+	    });
+	} else {
+		initQuiz();
+	}
+}
 
 
 // IE 11 (edge) på windows 7 på KVUC havde problemer med anvendelse global regex med variabel search/replace i august 2017. 
@@ -497,12 +632,9 @@ var testStr = 'abcdefg_abcdefg_abcdefg';
 globalReplace(testStr, 'abc', '123');
 
 
-$(window).resize(function() {
-	ajustDropzoneHeight_template2();
-});
 
+function initQuiz() {
 
-$(document).ready(function() {
 	window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
 	window.dropZoneObj = null;
 	window.dropZoneObj_over = null;
@@ -517,7 +649,6 @@ $(document).ready(function() {
 	enable_audio();
 
 	$('#interface').append(make_scoreCounter());
-
 
 	$( ".card" ).draggable({
 		revert: function(valid) {
@@ -617,6 +748,7 @@ $(document).ready(function() {
 
 				// alert('RUN TEMPLATE 2');
 				setTimeout(function() {
+					osc.save('jsonData_samf_ideologi', true);
 					template2();
 				}, 1000);
 			}
@@ -640,6 +772,161 @@ $(document).ready(function() {
 
 
 	$('#interface').after('<div id="log"></div>');
+
+}
+
+
+
+$(window).resize(function() {
+	ajustDropzoneHeight_template2();
+});
+
+
+$(document).ready(function() {
+
+	returnLastStudentSession();
+
+	
+	// window.showAnswer_bool = false;		// if "true" the answers will be shown in each card.
+	// window.dropZoneObj = null;
+	// window.dropZoneObj_over = null;
+	// window.eObj = {
+	// 	success: 0, 
+	// 	attempt: 0 
+	// };
+	// setCardId();
+	// $('#interface').html(template());
+	// organizeCardPile('#cardPile',5, 10);
+	// setDropzoneEvents();
+	// enable_audio();
+
+	// $('#interface').append(make_scoreCounter());
+
+	// initQuiz();
+
+
+	// $( ".card" ).draggable({
+	// 	revert: function(valid) {
+
+	// 		var id = $(this).attr('id');
+	// 		console.log('card - REVERT - id: ' + id);
+
+	// 		// var id = parseInt($(this).prop('id'));   // <------- MARK (#3a#) - IMPORTANT: This is beter than (#3b#)
+	// 		//console.log('setEventHandlers - revert - id: ' + id);
+
+	// 		var dropZoneArr = [];
+	// 		for (var n in jsonData.dropzone) {
+	// 			if (parseInt(n)!=0) {
+	// 				dropZoneArr.push('#'+jsonData.dropzone[n].attr.id);
+	// 			}
+	// 		}
+	// 		console.log('card - REVERT - dropZoneArr: ' + JSON.stringify(dropZoneArr));
+
+ //            var dropObj = isDropZoneUnderDraggable(dropZoneArr, id);
+ //            console.log('card - REVERT - dropObj: ' + JSON.stringify(dropObj));
+
+ //            update_scoreCounter(dropObj);
+
+	// 		// console.log('card - dropZoneObj_over: ' + JSON.stringify(dropZoneObj_over));
+
+	// 		// ATO found the following if-else construct, that solves the error-sound issue. It is a good (but undocumented) way of triggering "events" on drop / not-drop.
+	// 		// SEE:   http://jamesallardice.com/run-a-callback-function-when-a-jquery-ui-draggable-widget-reverts/
+	//         if(valid) {
+	//             console.log("Dropped in a valid location");
+	//             correct_sound();
+
+	//             // {insideDropzone: false, dropZone: null, dropped: eObj.isCurrentDraggableDropped};
+	//             // $('#'+id).css({'background-color': '#F00'});
+	//             var parent = $('#'+id).closest('.dropzoneHeading').prop('id'); //  css('background-color');
+	//             // var Tid = $('.dropzoneHeading', parent).prop('id');
+	//             console.log('card - REVERT - parent: ' + parent);
+	//             // $('#'+id).css();
+
+
+	//         }
+	//         else {
+	//          console.log("Dropped in a invalid location");
+	//          	error_sound();
+	//         }
+	//         return !valid;
+	//     },
+	// 	start: function(event, ui) {
+	// 		console.log('card - START');
+	// 		window.topPos = $(this).css('top');
+
+	// 		eObj.isCurrentDraggableDropped = false;
+ //            eObj.idOfCurrentDraggable = $(this).prop('id');
+	// 	},
+	// 	stop: function(event, ui) {
+	// 		console.log('card - STOP');
+
+	// 		// console.log('card - dropZoneObj: ' + JSON.stringify(dropZoneObj));
+
+	// 		if (dropZoneObj !== null){ // If student answer is correct...
+	// 			var dropId = $(dropZoneObj).prop('id');
+	// 			console.log('card - dropId: ' + dropId);
+
+	// 			$(dropZoneObj).append(SimpleClone($(this)).addClass("Clone"));  // Append the cloned card to dropzone
+	// 			$(this).remove();												// Remove the original card
+	// 			organizeCardPile('#'+dropId, 3, 0);
+				
+	// 			// if (dropId == 'wasteBin') {
+	// 			// 	$('.glyphicons-bin').css({'opacity':'0'});
+	// 			// 	$( '.glyphicons-bin' ).animate({ opacity: 1}, 1000);
+	// 			// 	$( '#'+dropId+' .card' ).last().animate({ opacity: 0.40}, 1000);
+	// 			// } 
+
+	// 			var id = $(this).attr('id');
+	// 			var tag = dropZoneObj.prev();
+	// 			// var bgColor = $('span', tag).css('background-color');
+	// 			var bgColor = $('.cardColor', tag).css('background-color');
+	//             console.log('card - REVERT - bgColor: ' + bgColor);
+	//             $('#'+id).animate({'background-color': bgColor}, 500); 
+
+
+	// 			dropZoneObj = null;  // Reset dropZoneObj...
+
+	// 			// console.log('card - CORRECT ');
+	// 			// correct_sound(); 
+
+
+	// 		} 
+	// 		else {  // If student answer is wrong...
+
+	// 			console.log('card - ERROR ');
+	// 			// error_sound();				// <------ Does not work on mobile devices - see the solution ATO found above. 
+	// 			$(this).css({'top': topPos});   // This is done to make Internet Explore 11 understand that it needs på place the card back to its original position.
+	// 		}
+
+	// 		if ($('#cardPile .card').length == 0) {
+	// 			console.log('step_2_template - INIT');
+
+	// 			// alert('RUN TEMPLATE 2');
+	// 			setTimeout(function() {
+	// 				osc.save('jsonData_samf_ideologi', true);
+	// 				template2();
+	// 			}, 1000);
+	// 		}
+
+	// 	},
+	// 	drag: function(event, ui) {
+	// 		console.log('card - DRAG');
+
+	// 		var id = $(this).prop('id');
+ //            var pos = $(this).position();
+ //            var off = $(this).offset();
+ //            console.log('entity - DRAG - id: ' + id + ', pos: ' + JSON.stringify(pos) + ', offset: ' + JSON.stringify(off));
+
+ //            eObj.draggableOffset = off;
+
+ //            eObj.draggablePos_end = $(this).offset();
+	// 	}
+	// });
+
+	// // template2();
+
+
+	// $('#interface').after('<div id="log"></div>');
 
 });
 
